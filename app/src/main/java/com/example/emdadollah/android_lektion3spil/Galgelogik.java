@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Galgelogik {
@@ -148,6 +149,37 @@ public class Galgelogik {
     nulstil();
   }
 
+  public void letteOrd(){
 
+    Iterator<String> it = muligeOrd.iterator();
+    while (it.hasNext()) {
+      if(it.next().length()>5){
+        it.remove();
+      }
+    }
+
+
+  }
+
+  public void normalOrd(){
+    Iterator<String> it = muligeOrd.iterator();
+    while (it.hasNext()) {
+      if(it.next().length()>7){
+        it.remove();
+      }
+    }
+
+  }
+
+  public void svaerOrd(){
+
+    Iterator<String> it = muligeOrd.iterator();
+    while (it.hasNext()) {
+      if(it.next().length()>=10){
+        it.remove();
+      }
+    }
+
+  }
 
 }

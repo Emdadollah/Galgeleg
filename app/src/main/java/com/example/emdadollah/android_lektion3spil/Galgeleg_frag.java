@@ -89,11 +89,14 @@ public class Galgeleg_frag extends Fragment implements View.OnClickListener {
         // her henter den indtastede input i mit Edittext og sætter det ind i gætBogstav metoden.
         galgelogik.gætBogstav(et.getText().toString());
 
+
         gætbogstav = et.getText().toString();
         // her checker vi at længden er lig med 1 bogstav når vi indtaster i vores editText.
         if(gætbogstav.length()!=1){
             et.setError("skriv kun et bogstav");
+
         }
+        galgelogik.letteOrd();
 
       if(v==check) {
           // hvis den gættede ord ikke er korrekt så skal den gøre følgende
