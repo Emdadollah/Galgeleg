@@ -157,6 +157,7 @@ public class Galgelogik {
         it.remove();
       }
 
+
     }
 
 

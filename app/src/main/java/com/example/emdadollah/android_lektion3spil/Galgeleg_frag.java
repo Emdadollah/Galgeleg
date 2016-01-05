@@ -99,7 +99,6 @@ public class Galgeleg_frag extends Fragment implements View.OnClickListener {
         galgelogik.letteOrd();
 
       if(v==check) {
-
           // hvis den gættede ord ikke er korrekt så skal den gøre følgende
           if (galgelogik.erSidsteBogstavKorrekt() == false) {
 
