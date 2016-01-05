@@ -156,6 +156,7 @@ public class Galgelogik {
       if(it.next().length()>5){
         it.remove();
       }
+
     }
 
 
