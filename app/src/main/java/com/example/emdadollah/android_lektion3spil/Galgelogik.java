@@ -147,4 +147,7 @@ public class Galgelogik {
     System.out.println("muligeOrd = " + muligeOrd);
     nulstil();
   }
+
+
+
 }

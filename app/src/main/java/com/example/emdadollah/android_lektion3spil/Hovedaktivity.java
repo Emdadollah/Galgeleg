@@ -13,6 +13,8 @@ public class Hovedaktivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hovedaktivity);
 
+
+
         // jeg starter min hovedfrag
         if (savedInstanceState == null) {
             Fragment fragment = new Hoved_frag();
