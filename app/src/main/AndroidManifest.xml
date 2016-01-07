@@ -28,18 +28,11 @@
             android:name=".Liste_frag"
             android:label="@string/title_activity_liste" >
         </activity>
-        <activity
-            android:name=".Main2Activity"
-            android:label="@string/title_activity_main2" >
-        </activity>
-        <activity
 
+        <activity
             android:name="Galgeleg_frag"
             android:label="@string/app_name" >
         </activity>
-
-
-        //client og key og id fra parse
         <meta-data
             android:name="com.parse.APPLICATION_ID"
             android:value="AE6LfvgUual9klDWe8KHBvPowqM77HsB6Tynzddk" />

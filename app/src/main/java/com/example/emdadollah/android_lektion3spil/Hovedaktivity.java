@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.parse.Parse;
 
 public class Hovedaktivity extends Activity {
 
