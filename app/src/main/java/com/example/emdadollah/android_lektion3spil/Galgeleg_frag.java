@@ -96,7 +96,7 @@ public class Galgeleg_frag extends Fragment implements View.OnClickListener {
             et.setError("skriv kun et bogstav");
 
         }
-        galgelogik.letteOrd();
+        galgelogik.svaerOrd();
 
       if(v==check) {
           // hvis den gættede ord ikke er korrekt så skal den gøre følgende

@@ -157,16 +157,15 @@ public class Galgelogik {
         it.remove();
       }
 
-
     }
-
 
   }
 
   public void normalOrd(){
     Iterator<String> it = muligeOrd.iterator();
     while (it.hasNext()) {
-      if(it.next().length()>7){
+      String str = it.next();
+      if(str.length()<5 || str.length()>7){
         it.remove();
       }
     }
@@ -177,7 +176,8 @@ public class Galgelogik {
 
     Iterator<String> it = muligeOrd.iterator();
     while (it.hasNext()) {
-      if(it.next().length()>=10){
+      String str = it.next();
+      if(str.length()<=8 || str.length()>15){
         it.remove();
       }
     }
