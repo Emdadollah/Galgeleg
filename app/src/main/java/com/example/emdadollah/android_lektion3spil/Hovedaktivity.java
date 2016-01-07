@@ -5,6 +5,8 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.parse.Parse;
+
 public class Hovedaktivity extends Activity {
 
 
@@ -12,6 +14,7 @@ public class Hovedaktivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hovedaktivity);
+
 
 
 

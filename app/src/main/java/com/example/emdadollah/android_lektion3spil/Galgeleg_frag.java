@@ -165,9 +165,5 @@ public class Galgeleg_frag extends Fragment implements View.OnClickListener {
 
             tvinfo.setText("Gæt Ordet : "+ord);
         }
-
-
-
-
     }
 }
