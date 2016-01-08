@@ -12,17 +12,17 @@
         android:layout_height="wrap_content"
         android:padding="20dip"
         android:src="@drawable/logo"
-        android:layout_above="@+id/vejledning"
+        android:layout_above="@+id/opretSpiller"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:id="@+id/vejledning"
+        android:id="@+id/opretSpiller"
         android:textColor="#ffff"
         android:background="@drawable/buttonshadow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dip"
-        android:text="Vejledning"
+        android:text="Opret spiller"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_centerVertical="true"
@@ -40,7 +40,7 @@
         android:text="spil"
         android:textSize="20sp"
         android:layout_marginTop="33dp"
-        android:layout_below="@+id/vejledning"
+        android:layout_below="@+id/opretSpiller"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true" />
 
@@ -54,7 +54,7 @@
         android:text="score"
         android:textSize="20sp"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/vejledning"
-        android:layout_alignEnd="@+id/vejledning" />
+        android:layout_alignStart="@+id/opretSpiller"
+        android:layout_alignEnd="@+id/opretSpiller" />
 
 </RelativeLayout>

@@ -18,7 +18,7 @@ public class Hoved_frag extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         View rod = i.inflate(R.layout.tre_knapper, container, false);
 
-        vejledning = (Button) rod.findViewById(R.id.vejledning);
+        vejledning = (Button) rod.findViewById(R.id.opretSpiller);
 
 
         spil = (Button) rod.findViewById(R.id.knap2);
@@ -41,7 +41,7 @@ public class Hoved_frag extends Fragment implements View.OnClickListener {
         if(v==vejledning){
 
             getFragmentManager().beginTransaction()
-                    .replace(R.id.fragment, new Hjaelp_frag())
+                    .replace(R.id.fragment, new OpretBruger_frag())
                     .addToBackStack(null)
                     .commit();
 

@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Hjaelp_frag"
+            android:name=".OpretBruger_frag"
             android:label="Hjaelp_akt" >
         </activity>
         <activity
