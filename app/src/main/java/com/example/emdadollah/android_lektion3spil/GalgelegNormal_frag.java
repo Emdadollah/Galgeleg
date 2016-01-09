@@ -1,8 +1,6 @@
 package com.example.emdadollah.android_lektion3spil;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,13 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.LogInCallback;
-import com.parse.Parse;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
-
-public class Galgeleg_frag extends Fragment implements View.OnClickListener {
+public class GalgelegNormal_frag extends Fragment implements View.OnClickListener {
 
     // laver et kald til klassen Galgelogik så jeg kan bruge klassens metoder
     static Galgelogik galgelogik = new Galgelogik();
@@ -116,7 +108,7 @@ public class Galgeleg_frag extends Fragment implements View.OnClickListener {
             et.setError("skriv kun et bogstav");
 
         }
-        galgelogik.letteOrd();
+        galgelogik.normalOrd();
 
       if(v==check) {
           // hvis den gættede ord ikke er korrekt så skal den gøre følgende
@@ -170,7 +162,7 @@ public class Galgeleg_frag extends Fragment implements View.OnClickListener {
           }
 
 
-          tvinfo2.setText("Brugte bogstaver " + galgelogik.getBrugteBogstaver());
+          tvinfo2.setText("Brugte bogstaver " + galgelogik.getBrugteBogstaver()+galgelogik.getAntalForkerteBogstaver());
 
       }
 

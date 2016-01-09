@@ -31,7 +31,11 @@
 
         <activity
             android:name="Galgeleg_frag"
-            android:label="@string/app_name" >
+            android:label="Galge spil" >
+        </activity>
+        <activity
+            android:name="Svaerhedsgrad_frag"
+            android:theme="@android:style/Theme.NoTitleBar">
         </activity>
         <meta-data
             android:name="com.parse.APPLICATION_ID"

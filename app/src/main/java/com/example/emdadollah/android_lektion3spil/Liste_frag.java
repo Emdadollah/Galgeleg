@@ -13,15 +13,18 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 // array af options
 
 public class Liste_frag extends DialogFragment implements OnItemClickListener, View.OnClickListener {
 
     ListView list;
 
-    String[] players ={"Emdah", "Kim", "Jonas", "Uffe den spage", "Jasser", "Daggar"};
+    String[] players = {"Emdah", "Kim", "Jonas", "Uffe den spage", "Jasser", "Daggar"};
 
-    int[] images={
+    int[] images = {
             R.drawable.pers1,
             R.drawable.pers1,
             R.drawable.pers1,
@@ -35,14 +38,17 @@ public class Liste_frag extends DialogFragment implements OnItemClickListener, V
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
+        //Parse
+        //ParseObject.registerSubclass(Spiller.class);
+        Parse.initialize(this.getActivity());
 
         View rod = i.inflate(R.layout.dialog, container, false);
 
-        list= (ListView) rod.findViewById(R.id.list);
+        list = (ListView) rod.findViewById(R.id.list);
 
         //getDialog().setTitle("spiller");
 
-        Adapter adapter=new CustomListAdapter(getActivity(), players, images);
+        Adapter adapter = new CustomListAdapter(getActivity(), players, images);
 
         list.setAdapter((ListAdapter) adapter);
 
@@ -54,7 +60,7 @@ public class Liste_frag extends DialogFragment implements OnItemClickListener, V
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String Slecteditem= players[+position];
+        String Slecteditem = players[+position];
         Toast.makeText(getActivity(), Slecteditem, Toast.LENGTH_SHORT).show();
     }
 

@@ -22,24 +22,26 @@ import com.parse.SignUpCallback;
  */
 public class OpretBruger_frag extends Fragment implements View.OnClickListener {
 
-    TextView th;
+
     EditText username;
     EditText password;
     Button submit;
+
+   // public ParseUser User = user.getCurrentUser();
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
 
         Parse.initialize(this.getActivity());
 /**
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();
-*/
+ ParseObject testObject = new ParseObject("TestObject");
+ testObject.put("foo", "bar");
+ testObject.saveInBackground();
+ */
 
         View rod = i.inflate(R.layout.opretbruger, container, false);
 
-        th = (TextView) rod.findViewById(R.id.th);
+
         username = (EditText) rod.findViewById(R.id.username);
         password = (EditText) rod.findViewById(R.id.password1);
         submit = (Button) rod.findViewById(R.id.submit);
@@ -53,25 +55,29 @@ public class OpretBruger_frag extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        ParseUser user = new ParseUser();
-        user.setUsername(username.getText().toString());
-        user.setPassword(password.getText().toString());
+        Logik.user = new ParseUser();
 
+        Logik.user.setUsername(username.getText().toString());
+        Logik.user.setPassword(password.getText().toString());
 
-        user.signUpInBackground(new SignUpCallback() {
+        Logik.user.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(ParseException e) {
-                if(e != null){
+                if (e != null) {
                     //vis fejl
                     Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
-                }else {
+                } else {
                     //start intent
+
                     Intent intent = new Intent(getActivity(), Hovedaktivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
+                    //user.logInInBackground(username.getText().toString(), password.getText().toString());
+                    //user.getCurrentUser().setEmail("muddi@dk.dk");
                 }
             }
         });
+
 
     }
 }

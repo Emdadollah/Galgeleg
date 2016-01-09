@@ -50,7 +50,8 @@ public class Hoved_frag extends Fragment implements View.OnClickListener {
         if(v==spil){
             Fragment fragment = new Galgeleg_frag();
             getFragmentManager().beginTransaction()
-                    .replace(R.id.fragment, new Galgeleg_frag())
+                    //.replace(R.id.fragment, new Galgeleg_frag())
+                    .replace(R.id.fragment, new Svaerhedsgrad_frag())
                     .addToBackStack(null)
                     .commit();
 
