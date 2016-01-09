@@ -13,7 +13,7 @@
         <activity
 
             android:name=".Hovedaktivity"
-            android:label="                        Galgelej" >
+            android:label="                        Galgeleg" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +35,7 @@
         </activity>
         <activity
             android:name="Svaerhedsgrad_frag"
-            android:theme="@android:style/Theme.NoTitleBar">
+            >
         </activity>
         <meta-data
             android:name="com.parse.APPLICATION_ID"

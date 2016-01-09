@@ -26,6 +26,7 @@ public class Svaerhedsgrad_frag extends Fragment implements View.OnClickListener
         letteOrd.setOnClickListener(this);
         normaleOrd.setOnClickListener(this);
 
+        getActivity().getActionBar().hide();
 
         return rod;
     }
