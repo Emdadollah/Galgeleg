@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class GalgelegNormal_frag extends Fragment implements View.OnClickListener {
+public class GalgelegSvaer_frag extends Fragment implements View.OnClickListener {
 
     // laver et kald til klassen Galgelogik så jeg kan bruge klassens metoder
     static Galgelogik galgelogik = new Galgelogik();
@@ -54,7 +54,7 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
         galgelogik.logStatus();
         galgelogik.opdaterSynligtOrd();
 
-       // denne asyntask henter ord fra DRs server som sættes ind i  array.
+        // denne asyntask henter ord fra DRs server som sættes ind i  array.
         System.out.println("Henter ord fra DRs server....");
         new AsyncTask() {
             @Override
@@ -71,13 +71,14 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
             @Override
             protected void onPostExecute(Object resultat) {
                 //et.setText("resultat: \n" + resultat);
-                galgelogik.normalOrd();
+                galgelogik.svaerOrd();
                 tvinfo.setText("Gæt Ordet :" + galgelogik.getSynligtOrd());
                 tvinfo2.setText("Brugte bogstaver :");
             }
         }.execute();
 
-       return rod;
+        return rod;
+
 
     }
 
@@ -95,61 +96,61 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
             et.setError("skriv kun et bogstav");
         }
 
-      if(v==check) {
-          // hvis den gættede ord ikke er korrekt så skal den gøre følgende
-          if (galgelogik.erSidsteBogstavKorrekt() == false) {
+        if(v==check) {
+            // hvis den gættede ord ikke er korrekt så skal den gøre følgende
+            if (galgelogik.erSidsteBogstavKorrekt() == false) {
 
-              Toast.makeText(getActivity(), "Bogstavet er forkert", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Bogstavet er forkert", Toast.LENGTH_SHORT).show();
 
-              // for hver gang man gætter forkert så bliver vores imageview opdateret med et nyt billed
-              if (galgelogik.getAntalForkerteBogstaver() == 1) {
-                  imgview.setImageResource(R.drawable.forkert1);
-              } else if (galgelogik.getAntalForkerteBogstaver() == 2) {
-                  imgview.setImageResource(R.drawable.forkert2);
-              } else if (galgelogik.getAntalForkerteBogstaver() == 3) {
-                  imgview.setImageResource(R.drawable.forkert3);
-              } else if (galgelogik.getAntalForkerteBogstaver() == 4) {
-                  imgview.setImageResource(R.drawable.forkert4);
-              } else if (galgelogik.getAntalForkerteBogstaver() == 5) {
-                  imgview.setImageResource(R.drawable.forkert5);
-              } else if (galgelogik.getAntalForkerteBogstaver() == 6) {
-                  imgview.setImageResource(R.drawable.forkert6);
-                  galgelogik.logStatus();
-              }
-              // efter den 6 gang så får man besked at man har tabt
-              else if (galgelogik.erSpilletTabt()) {
+                // for hver gang man gætter forkert så bliver vores imageview opdateret med et nyt billed
+                if (galgelogik.getAntalForkerteBogstaver() == 1) {
+                    imgview.setImageResource(R.drawable.forkert1);
+                } else if (galgelogik.getAntalForkerteBogstaver() == 2) {
+                    imgview.setImageResource(R.drawable.forkert2);
+                } else if (galgelogik.getAntalForkerteBogstaver() == 3) {
+                    imgview.setImageResource(R.drawable.forkert3);
+                } else if (galgelogik.getAntalForkerteBogstaver() == 4) {
+                    imgview.setImageResource(R.drawable.forkert4);
+                } else if (galgelogik.getAntalForkerteBogstaver() == 5) {
+                    imgview.setImageResource(R.drawable.forkert5);
+                } else if (galgelogik.getAntalForkerteBogstaver() == 6) {
+                    imgview.setImageResource(R.drawable.forkert6);
+                    galgelogik.logStatus();
+                }
+                // efter den 6 gang så får man besked at man har tabt
+                else if (galgelogik.erSpilletTabt()) {
 
-                  Toast.makeText(getActivity(), "du har tabt spillet", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "du har tabt spillet", Toast.LENGTH_SHORT).show();
 
-                  tvinfo.setText("Ordet er : " + galgelogik.getOrdet());
-                  //Logik.user.getCurrentUser().setEmail("hejhej");
+                    tvinfo.setText("Ordet er : " + galgelogik.getOrdet());
+                    //Logik.user.getCurrentUser().setEmail("hejhej");
 
-                  //Logik.spiller.saveInBackground();
+                    //Logik.spiller.saveInBackground();
 
-              }
+                }
 
-          } else if (galgelogik.erSidsteBogstavKorrekt() == true) {
+            } else if (galgelogik.erSidsteBogstavKorrekt() == true) {
 
-              Toast.makeText(getActivity(), "Bogstavet er korrekt", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Bogstavet er korrekt", Toast.LENGTH_SHORT).show();
 
-              galgelogik.opdaterSynligtOrd();
+                galgelogik.opdaterSynligtOrd();
 
-              // denne metode gør de bogstaver der er korrekte synlige.
-              tvinfo.setText("Gæt Ordet : " + galgelogik.getSynligtOrd());
+                // denne metode gør de bogstaver der er korrekte synlige.
+                tvinfo.setText("Gæt Ordet : " + galgelogik.getSynligtOrd());
 
-              if (galgelogik.erSpilletVundet()) {
+                if (galgelogik.erSpilletVundet()) {
 
-                  galgelogik.opdaterSynligtOrd();
+                    galgelogik.opdaterSynligtOrd();
 
-                  Toast.makeText(getActivity(), "Du har vundet tillykke", Toast.LENGTH_SHORT).show();
-              }
+                    Toast.makeText(getActivity(), "Du har vundet tillykke", Toast.LENGTH_SHORT).show();
+                }
 
-          }
+            }
 
 
-          tvinfo2.setText("Brugte bogstaver " + galgelogik.getBrugteBogstaver()+galgelogik.getAntalForkerteBogstaver());
+            tvinfo2.setText("Brugte bogstaver " + galgelogik.getBrugteBogstaver()+galgelogik.getAntalForkerteBogstaver());
 
-      }
+        }
 
         // når der trykkes på genstart så nulstiles mit textview, imageview.
         if(v==genstart){

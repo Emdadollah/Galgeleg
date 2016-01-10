@@ -138,14 +138,14 @@ public class Galgelogik {
 
   public void hentOrdFraDr() throws Exception {
     String data = hentUrl("http://dr.dk");
-    System.out.println("data = " + data);
+    //System.out.println("data = " + data);
 
     data = data.replaceAll("<.+?>", " ").toLowerCase().replaceAll("[^a-zæøå]", " ");
     System.out.println("data = " + data);
     muligeOrd.clear();
     muligeOrd.addAll(new HashSet<String>(Arrays.asList(data.split(" "))));
 
-    System.out.println("muligeOrd = " + muligeOrd);
+    //System.out.println("muligeOrd = " + muligeOrd);
     nulstil();
   }
 
@@ -153,12 +153,10 @@ public class Galgelogik {
 
     Iterator<String> it = muligeOrd.iterator();
     while (it.hasNext()) {
-      if(it.next().length()>5){
+      if(it.next().length()>2){
         it.remove();
       }
-
     }
-
   }
 
   public void normalOrd(){
@@ -169,19 +167,15 @@ public class Galgelogik {
         it.remove();
       }
     }
-
   }
 
   public void svaerOrd(){
-
     Iterator<String> it = muligeOrd.iterator();
     while (it.hasNext()) {
       String str = it.next();
-      if(str.length()<=8 || str.length()>15){
+      if(str.length()<=10 || str.length()>20){
         it.remove();
       }
     }
-
   }
-
 }

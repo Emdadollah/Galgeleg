@@ -30,7 +30,7 @@
         </activity>
 
         <activity
-            android:name="Galgeleg_frag"
+            android:name=".GalgelegLet_frag"
             android:label="Galge spil" >
         </activity>
         <activity

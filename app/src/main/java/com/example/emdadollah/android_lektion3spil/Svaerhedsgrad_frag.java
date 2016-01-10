@@ -25,6 +25,7 @@ public class Svaerhedsgrad_frag extends Fragment implements View.OnClickListener
 
         letteOrd.setOnClickListener(this);
         normaleOrd.setOnClickListener(this);
+        svaereOrd.setOnClickListener(this);
 
         getActivity().getActionBar().hide();
 
@@ -34,15 +35,15 @@ public class Svaerhedsgrad_frag extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         if (v == letteOrd) {
-            Fragment fragment = new Galgeleg_frag();
+            Fragment fragment = new GalgelegLet_frag();
             getFragmentManager().beginTransaction()
-                    .replace(R.id.fragment, new Galgeleg_frag())
+                    .replace(R.id.fragment, new GalgelegLet_frag())
                     .addToBackStack(null)
                     .commit();
 
         }
         if (v == normaleOrd) {
-            Fragment fragment = new Galgeleg_frag();
+            Fragment fragment = new GalgelegNormal_frag();
             getFragmentManager().beginTransaction()
                     .replace(R.id.fragment, new GalgelegNormal_frag())
                     .addToBackStack(null)
@@ -50,9 +51,9 @@ public class Svaerhedsgrad_frag extends Fragment implements View.OnClickListener
 
         }
         if (v == svaereOrd) {
-            Fragment fragment = new Galgeleg_frag();
+            Fragment fragment = new GalgelegSvaer_frag();
             getFragmentManager().beginTransaction()
-                    .replace(R.id.fragment, new Galgeleg_frag())
+                    .replace(R.id.fragment, new GalgelegSvaer_frag())
                     .addToBackStack(null)
                     .commit();
 
