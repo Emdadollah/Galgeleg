@@ -1,5 +1,6 @@
 package com.example.emdadollah.android_lektion3spil;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -18,18 +19,29 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
-        SQLiteDatabase db = this.getWritableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String SQL_String = "CREATE TABLE " + TABLE_NAME + "(" + COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_2 + " TEXT," + COL_3 + " INTEGER"+ ")";
+        String SQL_String = "CREATE TABLE " + TABLE_NAME + "(" + COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_2 + " TEXT," + COL_3 + " INTEGER" + ")";
         db.execSQL(SQL_String);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+ TABLE_NAME+ ";");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME + ";");
         onCreate(db);
+    }
+
+    public boolean insertData(String name, Integer score) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_2, name);
+        contentValues.put(COL_3, score);
+        long result = db.insert(TABLE_NAME, null, contentValues);
+        if (result == -1)
+            return false;
+        else
+            return true;
     }
 }

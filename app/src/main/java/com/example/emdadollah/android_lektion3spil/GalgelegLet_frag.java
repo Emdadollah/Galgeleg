@@ -121,8 +121,8 @@ public class GalgelegLet_frag extends Fragment implements View.OnClickListener {
                     imgview.setImageResource(R.drawable.forkert6);
                     galgelogik.logStatus();
                 }
-                // efter den 6 gang så får man besked at man har tabt
                 else if (galgelogik.erSpilletTabt()) {
+                // efter den 6 gang så får man besked at man har tabt
 
                     Toast.makeText(getActivity(), "du har tabt spillet", Toast.LENGTH_SHORT).show();
 
