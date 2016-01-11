@@ -20,6 +20,8 @@ public class Galgelogik {
   private boolean spilletErVundet;
   private boolean spilletErTabt;
 
+  private int score;
+
 
   public ArrayList<String> getBrugteBogstaver() {
     return brugteBogstaver;
@@ -53,6 +55,22 @@ public class Galgelogik {
     return spilletErTabt || spilletErVundet;
   }
 
+  //Score system
+  public int getScore(){
+    return score;
+  }
+
+  public void setScore(int nyScore){
+    score = nyScore;
+  }
+  public void enrigtigiscore(int nyScore){
+    score +=10;
+  }
+  public void enfejiscore(int nyScore){
+    score -=10;
+  }
+
+
 
   public Galgelogik() {
     muligeOrd.add("bil");
@@ -73,6 +91,7 @@ public class Galgelogik {
     spilletErTabt = false;
     ordet = muligeOrd.get(new Random().nextInt(muligeOrd.size()));
     opdaterSynligtOrd();
+    setScore(100);
   }
 
 
@@ -92,7 +111,7 @@ public class Galgelogik {
 
   public void gætBogstav(String bogstav) {
     if (bogstav.length() != 1) return;
-    System.out.println("Der gættes på bogstavet: " + bogstav);
+    System.out.println("Der gættes på bogstavet: " + bogstav+ "DIN STARTSCORE ER: "+ getScore());
     if (brugteBogstaver.contains(bogstav)) return;
     if (spilletErVundet || spilletErTabt) return;
 
@@ -100,11 +119,14 @@ public class Galgelogik {
 
     if (ordet.contains(bogstav)) {
       sidsteBogstavVarKorrekt = true;
-      System.out.println("Bogstavet var korrekt: " + bogstav);
+      enrigtigiscore(getScore());
+      System.out.println("Bogstavet var korrekt: " + bogstav+ " DIN SCORE ER NU: "+ getScore());
+
     } else {
       // Vi gættede på et bogstav der ikke var i ordet.
       sidsteBogstavVarKorrekt = false;
-      System.out.println("Bogstavet var IKKE korrekt: " + bogstav);
+      enfejiscore(getScore());
+      System.out.println("Bogstavet var IKKE korrekt: " + bogstav+ " DIN SCORE ER NU: " + getScore());
       antalForkerteBogstaver = antalForkerteBogstaver + 1;
       if (antalForkerteBogstaver > 6) {
         spilletErTabt = true;
@@ -122,6 +144,7 @@ public class Galgelogik {
     if (spilletErTabt) System.out.println("- SPILLET ER TABT");
     if (spilletErVundet) System.out.println("- SPILLET ER VUNDET");
     System.out.println("---------- ");
+    System.out.println("DIN SCORE ER NU: " + getScore());
   }
 
 
