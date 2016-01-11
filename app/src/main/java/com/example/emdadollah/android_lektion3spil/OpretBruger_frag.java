@@ -44,7 +44,7 @@ public class OpretBruger_frag extends Fragment implements View.OnClickListener {
 
         username = (EditText) rod.findViewById(R.id.username);
         password = (EditText) rod.findViewById(R.id.password1);
-        submit = (Button) rod.findViewById(R.id.submit);
+        submit = (Button) rod.findViewById(R.id.submit_button);
 
         submit.setOnClickListener(this);
 
