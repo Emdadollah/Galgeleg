@@ -155,6 +155,7 @@ public class Galgelogik {
     while (it.hasNext()) {
       if(it.next().length()>2){
         it.remove();
+        nulstil();
       }
     }
   }
@@ -165,6 +166,7 @@ public class Galgelogik {
       String str = it.next();
       if(str.length()<5 || str.length()>7){
         it.remove();
+        nulstil();
       }
     }
   }
@@ -175,6 +177,7 @@ public class Galgelogik {
       String str = it.next();
       if(str.length()<=10 || str.length()>20){
         it.remove();
+        nulstil();
       }
     }
   }
