@@ -17,7 +17,7 @@ import android.widget.RelativeLayout;
  */
 public class Hoved_frag extends Fragment implements View.OnClickListener {
 
-    Button vejledning;
+    Button opretSpiller;
     Button spil;
     Button score;
     private PopupWindow popupWindow;
@@ -28,7 +28,7 @@ public class Hoved_frag extends Fragment implements View.OnClickListener {
 
         View rod = i.inflate(R.layout.tre_knapper, container, false);
 
-        vejledning = (Button) rod.findViewById(R.id.opretSpiller);
+        opretSpiller = (Button) rod.findViewById(R.id.opretSpiller);
         relativeLayout = (RelativeLayout) rod.findViewById(R.id.relative);
 
 
@@ -38,7 +38,7 @@ public class Hoved_frag extends Fragment implements View.OnClickListener {
         score = (Button) rod.findViewById(R.id.knap3);
 
 
-        vejledning.setOnClickListener(this);
+        opretSpiller.setOnClickListener(this);
         spil.setOnClickListener(this);
         score.setOnClickListener(this);
 
@@ -49,7 +49,7 @@ public class Hoved_frag extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        if (v == vejledning) {
+        if (v == opretSpiller) {
 
             getFragmentManager().beginTransaction()
                     .replace(R.id.fragment, new OpretBruger_frag())
@@ -59,20 +59,19 @@ public class Hoved_frag extends Fragment implements View.OnClickListener {
         }
 
         if (v == spil) {
+/**
+ layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+ ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.popup, null);
 
-            layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.popup, null);
+ popupWindow = new PopupWindow(container, 400, 400, true);
+ popupWindow.showAtLocation(relativeLayout, Gravity.NO_GRAVITY, 500, 500);
 
-            popupWindow = new PopupWindow(container, 400, 400, true);
-            popupWindow.showAtLocation(relativeLayout, Gravity.NO_GRAVITY, 500, 500);
-
-            container.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent motionEvent) {
-                    popupWindow.dismiss();
-                    return true;
-                }
-            });
+ container.setOnTouchListener(new View.OnTouchListener() {
+@Override public boolean onTouch(View v, MotionEvent motionEvent) {
+popupWindow.dismiss();
+return true;
+}
+});*/
 
             // Fragment fragment = new GalgelegLet_frag();
             getFragmentManager().beginTransaction()
@@ -85,6 +84,8 @@ public class Hoved_frag extends Fragment implements View.OnClickListener {
 
 
         if (v == score) {
+
+
             Fragment fragment = new Liste_frag();
             getFragmentManager().beginTransaction()
                     .replace(R.id.fragment, fragment)  // tom container i layout

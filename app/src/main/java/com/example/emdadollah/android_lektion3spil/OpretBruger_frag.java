@@ -73,11 +73,11 @@ public class OpretBruger_frag extends Fragment implements View.OnClickListener {
     public void deleteData() {
         Integer deletedRows = myDbhelper.deleteData(username.getText().toString());
         if (deletedRows > 0){
-            System.out.println("Data Inserted");
-            Toast.makeText(getActivity(), "Spiller gemt!", Toast.LENGTH_LONG).show();
+            System.out.println("Data deleted");
+            Toast.makeText(getActivity(), "Spiller slettet!", Toast.LENGTH_LONG).show();
         } else {
-            System.out.println("Data not Inserted");
-            Toast.makeText(getActivity(), "Spiller ikke gemt :(", Toast.LENGTH_LONG).show();
+            System.out.println("Data not deleted");
+            Toast.makeText(getActivity(), "Spiller ikke slettet :(", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -115,12 +115,13 @@ public class OpretBruger_frag extends Fragment implements View.OnClickListener {
         builder.setCancelable(true);
         builder.setTitle(title);
         builder.setIcon(R.drawable.forkert6);
+
         builder.setMessage(Message);
         builder.show();
     }
 
     public void submit() {
-        boolean isInserted = myDbhelper.insertData(username.getText().toString(), null);
+        boolean isInserted = myDbhelper.insertData(username.getText().toString(), score.getText().toString());
         if (isInserted) {
             System.out.println("Data Inserted");
             Toast.makeText(getActivity(), "Spiller gemt!", Toast.LENGTH_LONG).show();
