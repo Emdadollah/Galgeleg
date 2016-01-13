@@ -2,6 +2,7 @@ package com.example.emdadollah.android_lektion3spil;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -12,9 +13,8 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "spiller.db";
     public static final String TABLE_NAME = "spiller_table";
 
-    public static final String COL_1 = "ID";
-    public static final String COL_2 = "NAME";
-    public static final String COL_3 = "SCORE";
+    public static final String COL_1 = "NAME";
+    public static final String COL_2 = "SCORE";
 
 
     public DbHelper(Context context) {
@@ -23,7 +23,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String SQL_String = "CREATE TABLE " + TABLE_NAME + "(" + COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + COL_2 + " TEXT," + COL_3 + " INTEGER" + ")";
+        String SQL_String = "CREATE TABLE " + TABLE_NAME + "(" + COL_1 + " STRING PRIMARY KEY AUTOINCREMENT," + COL_2 +" STRING" + ")";
         db.execSQL(SQL_String);
     }
 
@@ -33,15 +33,35 @@ public class DbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String name, Integer score) {
+    public Integer deleteData(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME,"NAME = ?",new String[]{name});
+    }
+
+    public boolean insertData(String name, String score) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2, name);
-        contentValues.put(COL_3, score);
+        contentValues.put(COL_1, name);
+        contentValues.put(COL_2, score);
         long result = db.insert(TABLE_NAME, null, contentValues);
         if (result == -1)
             return false;
         else
             return true;
+    }
+    public boolean updateData(String name, String score) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1, name);
+        contentValues.put(COL_2, score);
+        db.update(TABLE_NAME, contentValues, "NAME = ?", new String[] {name});
+
+        return true;
+    }
+
+    public Cursor getAllData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * from " + TABLE_NAME, null);
+        return res;
     }
 }

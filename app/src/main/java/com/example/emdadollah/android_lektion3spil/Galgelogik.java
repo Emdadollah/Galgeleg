@@ -55,11 +55,10 @@ public class Galgelogik {
     return spilletErTabt || spilletErVundet;
   }
 
-  //Score system
+  //Scoresystem
   public int getScore(){
     return score;
   }
-
   public void setScore(int nyScore){
     score = nyScore;
   }
@@ -111,7 +110,7 @@ public class Galgelogik {
 
   public void gætBogstav(String bogstav) {
     if (bogstav.length() != 1) return;
-    System.out.println("Der gættes på bogstavet: " + bogstav+ "DIN STARTSCORE ER: "+ getScore());
+    System.out.println("Der gættes på bogstavet: " + bogstav+ " DIN STARTSCORE ER: "+ getScore());
     if (brugteBogstaver.contains(bogstav)) return;
     if (spilletErVundet || spilletErTabt) return;
 
@@ -168,7 +167,7 @@ public class Galgelogik {
     muligeOrd.clear();
     muligeOrd.addAll(new HashSet<String>(Arrays.asList(data.split(" "))));
 
-    //System.out.println("muligeOrd = " + muligeOrd);
+    System.out.println("muligeOrd = " + muligeOrd);
     nulstil();
   }
 
