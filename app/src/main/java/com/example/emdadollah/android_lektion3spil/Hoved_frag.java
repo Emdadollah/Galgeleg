@@ -1,7 +1,9 @@
 package com.example.emdadollah.android_lektion3spil;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -12,10 +14,8 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
-/**
- * Created by Emdadollah on 16-11-2015.
- */
 public class Hoved_frag extends Fragment implements View.OnClickListener {
+    DbHelper myDbhelper;
 
     Button opretSpiller;
     Button spil;
@@ -25,18 +25,16 @@ public class Hoved_frag extends Fragment implements View.OnClickListener {
     private RelativeLayout relativeLayout;
 
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
+        myDbhelper = new DbHelper(this.getActivity());
 
         View rod = i.inflate(R.layout.tre_knapper, container, false);
 
-        opretSpiller = (Button) rod.findViewById(R.id.opretSpiller);
         relativeLayout = (RelativeLayout) rod.findViewById(R.id.relative);
-
+        opretSpiller = (Button) rod.findViewById(R.id.opretSpiller);
 
         spil = (Button) rod.findViewById(R.id.knap2);
 
-
         score = (Button) rod.findViewById(R.id.knap3);
-
 
         opretSpiller.setOnClickListener(this);
         spil.setOnClickListener(this);
@@ -44,7 +42,6 @@ public class Hoved_frag extends Fragment implements View.OnClickListener {
 
         return rod;
     }
-
 
     @Override
     public void onClick(View v) {
@@ -55,9 +52,7 @@ public class Hoved_frag extends Fragment implements View.OnClickListener {
                     .replace(R.id.fragment, new OpretBruger_frag())
                     .addToBackStack(null)
                     .commit();
-
         }
-
         if (v == spil) {
 /**
  layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -72,7 +67,6 @@ popupWindow.dismiss();
 return true;
 }
 });*/
-
             // Fragment fragment = new GalgelegLet_frag();
             getFragmentManager().beginTransaction()
                     //.replace(R.id.fragment, new GalgelegLet_frag())
@@ -84,15 +78,40 @@ return true;
 
 
         if (v == score) {
+            viewAll();
 
-
-            Fragment fragment = new Liste_frag();
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.fragment, fragment)  // tom container i layout
-                    .addToBackStack(null)
-                    .commit();
+            /** Fragment fragment = new Liste_frag();
+             getFragmentManager().beginTransaction()
+             .replace(R.id.fragment, fragment)  // tom container i layout
+             .addToBackStack(null)
+             .commit();*/
 
         }
+    }
 
+    public void viewAll() {
+        Cursor res = myDbhelper.getAllData();
+        if (res.getCount() == 0) {
+            //message
+            showMessage("Error", "No data found");
+            return;
+        }
+        StringBuffer buffer = new StringBuffer();
+        while (res.moveToNext()) {
+            buffer.append("Spiller : " + res.getString(1) + "\n");
+            buffer.append("Score : " + res.getString(2) + "\n\n");
+        }
+        //Show all data
+        showMessage("Spiller score", buffer.toString());
+    }
+
+    public void showMessage(String title, String Message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setIcon(R.drawable.forkert6);
+
+        builder.setMessage(Message);
+        builder.show();
     }
 }

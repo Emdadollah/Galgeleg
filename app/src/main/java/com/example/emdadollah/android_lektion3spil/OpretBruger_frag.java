@@ -12,11 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-/**
- * Created by Emdadollah on 03-11-2015.
- */
 public class OpretBruger_frag extends Fragment implements View.OnClickListener {
-
     DbHelper myDbhelper;
 
     EditText username;
@@ -59,7 +55,7 @@ public class OpretBruger_frag extends Fragment implements View.OnClickListener {
             submit();
         }
         if (v == viewAllbot) {
-            viewAll();
+           viewAll();
         }
         if (v == update){
             updateAll();
@@ -80,6 +76,31 @@ public class OpretBruger_frag extends Fragment implements View.OnClickListener {
             Toast.makeText(getActivity(), "Spiller ikke slettet :(", Toast.LENGTH_LONG).show();
         }
     }
+    public void viewAll() {
+        Cursor res = myDbhelper.getAllData();
+        if (res.getCount() == 0) {
+            //message
+            showMessage("Error", "No data found");
+            return;
+        }
+        StringBuffer buffer = new StringBuffer();
+        while (res.moveToNext()) {
+            buffer.append("Spiller : " + res.getString(1) + "\n");
+            buffer.append("Score : " + res.getString(2) + "\n\n");
+        }
+        //Show all data
+        showMessage("Spiller score", buffer.toString());
+    }
+
+    public void showMessage(String title, String Message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setIcon(R.drawable.forkert6);
+
+        builder.setMessage(Message);
+        builder.show();
+    }
 
     public void updateAll() {
         boolean isUpdatet = myDbhelper.updateData(username.getText().toString(),score.getText().toString());
@@ -90,35 +111,8 @@ public class OpretBruger_frag extends Fragment implements View.OnClickListener {
             System.out.println("Data not Inserted");
             Toast.makeText(getActivity(), "Spiller ikke gemt :(", Toast.LENGTH_LONG).show();
         }
-
     }
 
-
-    public void viewAll() {
-        Cursor res = myDbhelper.getAllData();
-        if (res.getCount()==0){
-            //message
-            showMessage("Error","No data found");
-            return ;
-        }
-        StringBuffer buffer = new StringBuffer();
-        while (res.moveToNext()){
-            buffer.append("Spiller : "+ res.getString(1) +"\n");
-            buffer.append("Score : "+ res.getString(2) + "\n\n");
-        }
-        //Show all data
-        showMessage("Spiller score",buffer.toString());
-    }
-
-    public void showMessage(String title, String Message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setIcon(R.drawable.forkert6);
-
-        builder.setMessage(Message);
-        builder.show();
-    }
 
     public void submit() {
         boolean isInserted = myDbhelper.insertData(username.getText().toString(), score.getText().toString());
