@@ -17,7 +17,6 @@ public class OpretBruger_frag extends Fragment implements View.OnClickListener {
 
     EditText username;
     EditText score;
-    EditText id;
     Button submit;
     Button viewAllbot;
     Button update;
@@ -33,7 +32,7 @@ public class OpretBruger_frag extends Fragment implements View.OnClickListener {
 
         username = (EditText) rod.findViewById(R.id.username);
         score = (EditText) rod.findViewById(R.id.score);
-        id = (EditText) rod.findViewById(R.id.Id);
+
         submit = (Button) rod.findViewById(R.id.submit_button);
         viewAllbot = (Button) rod.findViewById(R.id.viewAll);
         update = (Button) rod.findViewById(R.id.update_button);
@@ -55,12 +54,12 @@ public class OpretBruger_frag extends Fragment implements View.OnClickListener {
             submit();
         }
         if (v == viewAllbot) {
-           viewAll();
+            viewAll();
         }
-        if (v == update){
+        if (v == update) {
             updateAll();
         }
-        if (v == delete){
+        if (v == delete) {
             deleteData();
         }
 
@@ -68,7 +67,7 @@ public class OpretBruger_frag extends Fragment implements View.OnClickListener {
 
     public void deleteData() {
         Integer deletedRows = myDbhelper.deleteData(username.getText().toString());
-        if (deletedRows > 0){
+        if (deletedRows > 0) {
             System.out.println("Data deleted");
             Toast.makeText(getActivity(), "Spiller slettet!", Toast.LENGTH_LONG).show();
         } else {
@@ -76,6 +75,7 @@ public class OpretBruger_frag extends Fragment implements View.OnClickListener {
             Toast.makeText(getActivity(), "Spiller ikke slettet :(", Toast.LENGTH_LONG).show();
         }
     }
+
     public void viewAll() {
         Cursor res = myDbhelper.getAllData();
         if (res.getCount() == 0) {
@@ -103,8 +103,8 @@ public class OpretBruger_frag extends Fragment implements View.OnClickListener {
     }
 
     public void updateAll() {
-        boolean isUpdatet = myDbhelper.updateData(username.getText().toString(),score.getText().toString());
-        if(isUpdatet){
+        boolean isUpdatet = myDbhelper.updateData(username.getText().toString(), score.getText().toString());
+        if (isUpdatet) {
             System.out.println("Data Inserted");
             Toast.makeText(getActivity(), "Spiller gemt!", Toast.LENGTH_LONG).show();
         } else {

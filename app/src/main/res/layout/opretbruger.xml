@@ -49,15 +49,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Id"
-        android:layout_below="@+id/score"
-        android:layout_alignEnd="@+id/score"
-        android:layout_alignParentStart="true"
-        android:hint="Id" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

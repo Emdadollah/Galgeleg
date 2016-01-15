@@ -23,6 +23,7 @@ public class Galgelogik {
   private int score;
 
 
+
   public ArrayList<String> getBrugteBogstaver() {
     return brugteBogstaver;
   }
