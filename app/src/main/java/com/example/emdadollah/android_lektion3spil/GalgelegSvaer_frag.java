@@ -1,6 +1,8 @@
 package com.example.emdadollah.android_lektion3spil;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,12 +19,14 @@ public class GalgelegSvaer_frag extends Fragment implements View.OnClickListener
 
     // laver et kald til klassen Galgelogik så jeg kan bruge klassens metoder
     static Galgelogik galgelogik = new Galgelogik();
+    DbHelper myDbhelper;
 
     ImageView imgview;
     private TextView tvinfo;
     private Button check;
     private EditText et;
     String ord;
+    String currentBruger;
     String gætbogstav;
     private TextView tvinfo2;
     Button genstart;
@@ -32,7 +36,7 @@ public class GalgelegSvaer_frag extends Fragment implements View.OnClickListener
 
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
-
+        myDbhelper = new DbHelper(this.getActivity());
         View rod = i.inflate(R.layout.activity_spil, container, false);
 
         imgview=(ImageView)rod.findViewById(R.id.Imgview);
@@ -121,11 +125,13 @@ public class GalgelegSvaer_frag extends Fragment implements View.OnClickListener
                 else if (galgelogik.erSpilletTabt()) {
 
                     Toast.makeText(getActivity(), "du har tabt spillet", Toast.LENGTH_SHORT).show();
-
                     tvinfo.setText("Ordet er : " + galgelogik.getOrdet());
-                    //Logik.user.getCurrentUser().setEmail("hejhej");
-
-                    //Logik.spiller.saveInBackground();
+                    System.out.println("DIN SCORE ER NU!! " + Integer.toString(galgelogik.getScore()));
+                    if (currentBruger == null) {
+                        showMessage("Score", "Ønsker du at gemme din score?");
+                    } else {
+                        updateAll(currentBruger, Integer.toString(galgelogik.getScore()));
+                    }
 
                 }
 
@@ -143,6 +149,11 @@ public class GalgelegSvaer_frag extends Fragment implements View.OnClickListener
                     galgelogik.opdaterSynligtOrd();
 
                     Toast.makeText(getActivity(), "Du har vundet tillykke", Toast.LENGTH_SHORT).show();
+                    if (currentBruger == null) {
+                        showMessage("Score", "Ønsker du at gemme din score?");
+                    } else {
+                        updateAll(currentBruger, Integer.toString(galgelogik.getScore()));
+                    }
                 }
 
             }
@@ -166,6 +177,58 @@ public class GalgelegSvaer_frag extends Fragment implements View.OnClickListener
             tvinfo2.setText("Brugte bogstaver: ");
 
             tvinfo.setText("Gæt Ordet : "+ord);
+        }
+    }
+    public void showMessage(String title, String Message) {
+        LayoutInflater inflater = LayoutInflater.from(this.getActivity());
+        View subView = inflater.inflate(R.layout.dialog_layout, null);
+        final EditText subEditText = (EditText) subView.findViewById(R.id.dialogEditText);
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
+        builder.setTitle(title);
+        builder.setIcon(R.drawable.forkert6);
+        builder.setMessage(Message);
+        builder.setCancelable(true);
+        builder.setView(subView);
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.dismiss();
+                    }
+                }
+        );
+        builder.setPositiveButton("Gem din score!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                currentBruger = subEditText.getText().toString();
+                submit(currentBruger, Integer.toString(galgelogik.getScore()));
+                Toast.makeText(getActivity(), subEditText.getText().toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        builder.show();
+    }
+
+    public void submit(String spiller, String score) {
+        boolean isInserted = myDbhelper.insertData(spiller, score);
+        if (isInserted) {
+            System.out.println("Data Inserted");
+            Toast.makeText(getActivity(), "Spiller gemt!", Toast.LENGTH_LONG).show();
+        } else {
+            System.out.println("Data not Inserted");
+            Toast.makeText(getActivity(), "Spiller ikke gemt :(", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void updateAll(String spiller, String score) {
+        boolean isUpdatet = myDbhelper.updateData(spiller, score);
+        if (isUpdatet) {
+            System.out.println("Data Inserted");
+            Toast.makeText(getActivity(), "Spiller gemt!", Toast.LENGTH_LONG).show();
+        } else {
+            System.out.println("Data not Inserted");
+            Toast.makeText(getActivity(), "Spiller ikke gemt :(", Toast.LENGTH_LONG).show();
         }
     }
 }
