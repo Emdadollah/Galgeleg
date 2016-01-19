@@ -1,4 +1,4 @@
-package com.example.emdadollah.galgeleg_final;
+package com.example.emdadollah.android_lektion3spil;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -88,13 +88,13 @@ return true;
 
         if (v == score) {
             lyd.start();
-            viewAll();
+            //viewAll();
 
-            /** Fragment fragment = new Liste_frag();
+            Fragment fragment = new Liste_frag();
              getFragmentManager().beginTransaction()
              .replace(R.id.fragment, fragment)  // tom container i layout
              .addToBackStack(null)
-             .commit();*/
+             .commit();
 
         }
     }

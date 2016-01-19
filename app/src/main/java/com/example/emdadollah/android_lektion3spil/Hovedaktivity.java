@@ -1,4 +1,4 @@
-package com.example.emdadollah.galgeleg_final;
+package com.example.emdadollah.android_lektion3spil;
 
 import android.app.Activity;
 import android.app.Fragment;

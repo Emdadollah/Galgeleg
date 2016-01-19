@@ -1,4 +1,4 @@
-package com.example.emdadollah.galgeleg_final;
+package com.example.emdadollah.android_lektion3spil;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class GalgelegNormal_frag extends Fragment implements View.OnClickListener {
+public class GalgelegLet_frag extends Fragment implements View.OnClickListener {
 
     // laver et kald til klassen Galgelogik så jeg kan bruge klassens metoder
     static Galgelogik galgelogik = new Galgelogik();
@@ -26,9 +26,9 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
     private Button check;
     private EditText et;
     String ord;
+    String currentBruger;
     String gætbogstav;
     private TextView tvinfo2;
-    String currentBruger;
     Button genstart;
 
     private static final String tag = "Dr server";
@@ -37,7 +37,6 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         myDbhelper = new DbHelper(this.getActivity());
-
         View rod = i.inflate(R.layout.activity_spil, container, false);
 
         imgview = (ImageView) rod.findViewById(R.id.Imgview);
@@ -50,13 +49,8 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
         genstart = (Button) rod.findViewById(R.id.genstart);
         et = (EditText) rod.findViewById(R.id.editText);
 
-
-        //System.out.println("----------"+Logik.user.getCurrentUser().getObjectId()+"----------");
-
-
         check.setOnClickListener(this);
         genstart.setOnClickListener(this);
-
 
         // denne asyntask henter ord fra DRs server som sættes ind i  array.
         System.out.println("Henter ord fra DRs server....");
@@ -65,7 +59,6 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
             protected Object doInBackground(Object... arg0) {
                 try {
                     galgelogik.hentOrdFraDr();
-                    galgelogik.nulstil();
 
                     return Log.d(tag, "Der er hentet data fra Dr");
                 } catch (Exception e) {
@@ -76,27 +69,28 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
 
             @Override
             protected void onPostExecute(Object resultat) {
-
-                // sætter den generede ord ind i textview  .
-                galgelogik.normalOrd();
+                //et.setText("resultat: \n" + resultat);
+                galgelogik.letteOrd();
                 tvinfo.setText("Gæt Ordet :" + galgelogik.getSynligtOrd());
                 tvinfo2.setText("Brugte bogstaver :");
-
-
             }
         }.execute();
 
 
+        // sætter den generede ord ind i textview  .
+
+
         galgelogik.logStatus();
         galgelogik.opdaterSynligtOrd();
+
         return rod;
+
 
     }
 
 
     @Override
     public void onClick(View v) {
-
         // her henter den indtastede input i mit Edittext og sætter det ind i gætBogstav metoden.
         galgelogik.gætBogstav(et.getText().toString());
         et.clearFocus();
@@ -127,9 +121,9 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
                 } else if (galgelogik.getAntalForkerteBogstaver() == 6) {
                     imgview.setImageResource(R.drawable.forkert6);
                     galgelogik.logStatus();
-                }
-                // efter den 6 gang så får man besked at man har tabt
-                else if (galgelogik.erSpilletTabt()) {
+                } else if (galgelogik.erSpilletTabt()) {
+                    // efter den 6 gang så får man besked at man har tabt
+
                     Toast.makeText(getActivity(), "du har tabt spillet", Toast.LENGTH_SHORT).show();
                     tvinfo.setText("Ordet er : " + galgelogik.getOrdet());
                     System.out.println("DIN SCORE ER NU!! " + Integer.toString(galgelogik.getScore()));
@@ -138,6 +132,7 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
                     } else {
                         updateAll(currentBruger, Integer.toString(galgelogik.getScore()));
                     }
+
                 }
 
             } else if (galgelogik.erSidsteBogstavKorrekt() == true) {
@@ -160,12 +155,8 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
                         updateAll(currentBruger, Integer.toString(galgelogik.getScore()));
                     }
                 }
-
             }
-
-
-            tvinfo2.setText("Brugte bogstaver " + galgelogik.getBrugteBogstaver() + galgelogik.getAntalForkerteBogstaver());
-
+            tvinfo2.setText("Brugte bogstaver " + galgelogik.getBrugteBogstaver());
         }
 
         // når der trykkes på genstart så nulstiles mit textview, imageview.
@@ -184,6 +175,8 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
             tvinfo.setText("Gæt Ordet : " + ord);
         }
     }
+
+
     public void showMessage(String title, String Message) {
         LayoutInflater inflater = LayoutInflater.from(this.getActivity());
         View subView = inflater.inflate(R.layout.dialog_layout, null);
@@ -236,4 +229,5 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
             Toast.makeText(getActivity(), "Spiller ikke gemt :(", Toast.LENGTH_LONG).show();
         }
     }
+
 }
