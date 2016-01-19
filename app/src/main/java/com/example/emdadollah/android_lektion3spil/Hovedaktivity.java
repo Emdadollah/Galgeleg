@@ -1,5 +1,6 @@
 package com.example.emdadollah.android_lektion3spil;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
@@ -10,7 +11,6 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
-
 
 public class Hovedaktivity extends Activity {
 
