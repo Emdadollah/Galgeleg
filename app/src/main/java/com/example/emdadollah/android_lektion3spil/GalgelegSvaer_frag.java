@@ -125,7 +125,7 @@ public class GalgelegSvaer_frag extends Fragment implements View.OnClickListener
                 else if (galgelogik.erSpilletTabt()) {
 
                     Toast.makeText(getActivity(), "du har tabt spillet", Toast.LENGTH_SHORT).show();
-                    tvinfo.setText("Ordet er : " + galgelogik.getOrdet());
+                    tvinfo.setText("Ordet er : " + galgelogik.getOrdet() + "                Din score er: "+ Integer.toString(galgelogik.getScore()));
                     System.out.println("DIN SCORE ER NU!! " + Integer.toString(galgelogik.getScore()));
                     if (currentBruger == null) {
                         showMessage("Score", "Ønsker du at gemme din score?");
