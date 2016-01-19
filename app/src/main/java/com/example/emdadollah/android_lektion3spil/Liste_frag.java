@@ -3,6 +3,7 @@ package com.example.emdadollah.android_lektion3spil;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,10 +38,9 @@ public class Liste_frag extends DialogFragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         myDbhelper = new DbHelper(this.getActivity());
-
-
-
         View rod = i.inflate(R.layout.dialog, container, false);
+
+        rod.setBackgroundColor(Color.BLACK);
 
         list = (ListView) rod.findViewById(R.id.list);
 
