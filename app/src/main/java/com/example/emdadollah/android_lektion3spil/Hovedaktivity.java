@@ -15,7 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-public class Hovedaktivity extends AppCompatActivity{
+public class Hovedaktivity extends Activity{
 
 
     static BroadcastReceiver reciever = new BroadcastReceiver() {
