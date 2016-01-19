@@ -1,13 +1,11 @@
-package com.example.emdadollah.android_lektion3spil;
+package com.example.emdadollah.galgeleg_final;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.Context;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,6 +14,7 @@ import android.widget.RelativeLayout;
 
 public class Hoved_frag extends Fragment implements View.OnClickListener {
     DbHelper myDbhelper;
+    MediaPlayer lyd;
 
     Button opretSpiller;
     Button spil;
@@ -24,12 +23,17 @@ public class Hoved_frag extends Fragment implements View.OnClickListener {
     private LayoutInflater layoutInflater;
     private RelativeLayout relativeLayout;
 
+
+
     public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
         myDbhelper = new DbHelper(this.getActivity());
 
         View rod = i.inflate(R.layout.tre_knapper, container, false);
 
+        lyd = MediaPlayer.create(getActivity(), R.raw.thoziclick);
+
         relativeLayout = (RelativeLayout) rod.findViewById(R.id.relative);
+
         opretSpiller = (Button) rod.findViewById(R.id.opretSpiller);
 
         spil = (Button) rod.findViewById(R.id.knap2);
@@ -47,6 +51,7 @@ public class Hoved_frag extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
 
         if (v == opretSpiller) {
+            lyd.start();
 
             getFragmentManager().beginTransaction()
                     .replace(R.id.fragment, new OpretBruger_frag())
@@ -54,6 +59,18 @@ public class Hoved_frag extends Fragment implements View.OnClickListener {
                     .commit();
         }
         if (v == spil) {
+            lyd.start();
+
+
+
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.fragment, new Svaerhedsgrad_frag())  // tom container i layout
+                    .addToBackStack(null)
+                    .commit();
+        }
+
+
 /**
  layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
  ViewGroup container = (ViewGroup) layoutInflater.inflate(R.layout.popup, null);
@@ -67,17 +84,10 @@ popupWindow.dismiss();
 return true;
 }
 });*/
-            // Fragment fragment = new GalgelegLet_frag();
-            getFragmentManager().beginTransaction()
-                    //.replace(R.id.fragment, new GalgelegLet_frag())
-                    .replace(R.id.fragment, new Svaerhedsgrad_frag())
-                    .addToBackStack(null)
-                    .commit();
-
-        }
 
 
         if (v == score) {
+            lyd.start();
             viewAll();
 
             /** Fragment fragment = new Liste_frag();
@@ -88,6 +98,8 @@ return true;
 
         }
     }
+
+
 
     public void viewAll() {
         Cursor res = myDbhelper.getAllData();

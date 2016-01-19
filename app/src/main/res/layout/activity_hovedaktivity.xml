@@ -4,7 +4,7 @@
     android:background="#2b9cc2"
 
 
-    tools:context="com.example.emdadollah.android_lektion3spil.Hovedaktivity">
+    tools:context="com.example.emdadollah.galgeleg_final.Hovedaktivity">
 
 
     <FrameLayout

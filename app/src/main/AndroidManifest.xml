@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.emdadollah.android_lektion3spil" >
+    package="com.example.emdadollah.galgeleg_final" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,9 +12,8 @@
         android:label="g25 Galgeleg"
         android:theme="@style/AppTheme" >
         <activity
-
-            android:name=".Hovedaktivity"
-            android:label="                        Galgeleg" >
+            android:name="com.example.emdadollah.galgeleg_final.Hovedaktivity"
+            android:label="Galgeleg" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,6 +27,7 @@
         <meta-data
             android:name="com.parse.CLIENT_KEY"
             android:value="ZKhLzCACLLCJGzGP3xloRLkcW5FExV7bDbe7dnW3" />
+
     </application>
 
 </manifest>

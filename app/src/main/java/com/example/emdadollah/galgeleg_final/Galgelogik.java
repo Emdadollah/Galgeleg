@@ -1,4 +1,4 @@
-package com.example.emdadollah.android_lektion3spil;
+package com.example.emdadollah.galgeleg_final;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.example.emdadollah.android_lektion3spil;
+package com.example.emdadollah.galgeleg_final;
 
 /**
  * Created by Emdadollah on 19-01-2016.

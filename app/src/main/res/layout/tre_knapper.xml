@@ -3,59 +3,60 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#2b9cc2"
+    android:background="@mipmap/hangmandead"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
     android:id="@+id/relative">
 
-    <ImageView
-        android:id="@+id/ikon"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="20dip"
-        android:src="@drawable/logo"
-        android:layout_above="@+id/opretSpiller"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/opretSpiller"
-        android:textColor="#ffff"
-        android:background="@drawable/buttonshadow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dip"
-        android:text="Opret spiller"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/knap2"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:id="@+id/knap2"
-        android:textColor="#ffff"
-        android:background="@drawable/buttonshadow"
-
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:padding="20dip"
-        android:text="spil"
-        android:textSize="20sp"
-        android:layout_marginTop="33dp"
-        android:layout_below="@+id/opretSpiller"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="200dp"
+        android:id="@+id/linearLayout">
 
-    <Button
-        android:id="@+id/knap3"
-        android:textColor="#ffff"
-        android:background="@drawable/buttonshadow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dip"
-        android:text="score"
-        android:textSize="20sp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/opretSpiller"
-        android:layout_alignEnd="@+id/opretSpiller" />
+        <Button
+            android:id="@+id/knap3"
+            android:textColor="#ffff"
+            android:background="@drawable/buttonshadow"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:padding="20dip"
+            android:text="score"
+            android:textSize="20sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/knap2" />
+
+        <Button
+            android:id="@+id/knap2"
+            android:textColor="#ffff"
+            android:background="@drawable/buttonshadow"
+
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:padding="20dip"
+            android:text="spil"
+            android:textSize="20sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_above="@+id/knap3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <Button
+            android:id="@+id/opretSpiller"
+            android:textColor="#ffff"
+            android:background="@drawable/buttonshadow"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:padding="20dip"
+            android:text="Opret spiller"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_above="@+id/knap2"
+            android:layout_alignStart="@+id/knap2" />
+    </LinearLayout>
 
 </RelativeLayout>
