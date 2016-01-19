@@ -1,5 +1,8 @@
 package com.example.emdadollah.android_lektion3spil;
 
+/**
+ * Created by Emdadollah on 19-01-2016.
+ */
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,41 +11,43 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CustomListAdapter extends ArrayAdapter<String> {
+import java.util.ArrayList;
+
+public class CustomListAdapter extends ArrayAdapter {
 
     Context c;
-    String[] players;
-    int[] images;
+    ArrayList<String> names;
+    ArrayList<String> scores;
     LayoutInflater inflater;
 
-    public CustomListAdapter(Context context, String[] players, int[] images) {
-        super(context, R.layout.rowmodel,players);
+    public CustomListAdapter(Context context, ArrayList<String> names, ArrayList<String> scores) {
+        super(context, R.layout.rowmodel,names);
         // TODO Auto-generated constructor stub
 
         this.c = context;
-        this.players =players;
-        this.images = images;
+        this.names =names;
+        this.scores = scores;
+
+
 
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-       if(convertView==null){
+        if(convertView==null){
 
-           inflater= (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-           convertView=inflater.inflate(R.layout.rowmodel,null);
-       }
-            TextView nametv =(TextView) convertView.findViewById(R.id.nameTv);
+            inflater= (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView=inflater.inflate(R.layout.rowmodel,null);
+        }
+        TextView nametv =(TextView) convertView.findViewById(R.id.players);
 
-            ImageView img =(ImageView) convertView.findViewById(R.id.imageView1);
+        TextView scoretv =(TextView) convertView.findViewById(R.id.score);
 
-            nametv.setText(players[position]);
-            img.setImageResource(images[position]);
+        nametv.setText(names.get(position));
+        scoretv.setText(scores.get(position));
 
 
         return convertView;
     }
 }
-
-
