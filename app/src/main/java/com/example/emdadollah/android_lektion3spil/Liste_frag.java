@@ -57,8 +57,6 @@ public class Liste_frag extends DialogFragment implements View.OnClickListener {
                 scores.add(res.getString(2));
             }
         }
-        String[] playername = new String[]{DbHelper.COL_0, DbHelper.COL_1};
-        String s = DbHelper.COL_0;
 
         Adapter adapter = new CustomListAdapter(getActivity(), names, scores);
 

@@ -45,7 +45,7 @@ public class CustomListAdapter extends ArrayAdapter {
         TextView scoretv =(TextView) convertView.findViewById(R.id.score);
 
         nametv.setText(names.get(position));
-        scoretv.setText(scores.get(position));
+        scoretv.setText("Score: "+scores.get(position));
 
 
         return convertView;
