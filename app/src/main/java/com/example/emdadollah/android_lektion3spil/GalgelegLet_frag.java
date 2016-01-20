@@ -3,7 +3,10 @@ package com.example.emdadollah.android_lektion3spil;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,21 +35,28 @@ public class GalgelegLet_frag extends Fragment implements View.OnClickListener {
     String currentBruger;
     String gætbogstav;
     private TextView tvinfo2;
-    Button genstart;
 
-    private Button a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, bogstavae,bogstavoe,bogstavaa;
+
+    private SensorManager manager;
+    private Sensor accelerometer;
+    private ShakeHandler shakeHandler;
+
+
+    private Button a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, bogstavae, bogstavoe, bogstavaa;
+
+    Button[] buttons = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, bogstavae, bogstavoe, bogstavaa};
 
     private static final String tag = "Dr server";
+
 
     @Override
     public View onCreateView(LayoutInflater in, ViewGroup container, Bundle savedInstanceState) {
         myDbhelper = new DbHelper(this.getActivity());
         View rod = in.inflate(R.layout.activity_spil, container, false);
 
-        Button[] buttons = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, bogstavae, bogstavoe, bogstavaa};
 
         String[] ids = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
-                "s", "t", "u", "v", "w", "x", "y", "z","bogstavae","bogstavoe","bogstavaa"};
+                "s", "t", "u", "v", "w", "x", "y", "z", "bogstavae", "bogstavoe", "bogstavaa"};
 
         imgview = (ImageView) rod.findViewById(R.id.Imgview);
         // sætter første billed ind i imageview.
@@ -54,18 +64,43 @@ public class GalgelegLet_frag extends Fragment implements View.OnClickListener {
 
         tvinfo = (TextView) rod.findViewById(R.id.th);
         tvinfo2 = (TextView) rod.findViewById(R.id.tv2);
-        genstart = (Button) rod.findViewById(R.id.genstart);
+
 
         for (int i = 0; i < buttons.length; i++) {
             int resId = getActivity().getResources().getIdentifier(ids[i], "id", "com.example.emdadollah.android_lektion3spil");
-            System.out.println("RETUNER RESID : "+resId);
+            System.out.println("RETUNER RESID : " + resId);
             buttons[i] = (Button) rod.findViewById(resId);
             buttons[i].setOnClickListener(this);
 
         }
 
+        manager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = manager
+                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        shakeHandler = new ShakeHandler();
+        shakeHandler.setOnShakeListener(new ShakeHandler.OnShakeListener() {
 
-        genstart.setOnClickListener(this);
+            @Override
+            public void onShake(int count) {
+
+                for (int i = 0; i < buttons.length; i++) {
+                    buttons[i].setVisibility(buttons[i].VISIBLE);
+                }
+                // denne metode nulstiller alt i galgelogiken
+                galgelogik.nulstil();
+
+
+                imgview.setImageResource(R.drawable.galge);
+                ord = galgelogik.getSynligtOrd();
+
+                Toast.makeText(getActivity(), "Genstartet", Toast.LENGTH_SHORT).show();
+
+                tvinfo2.setText("Brugte bogstaver: ");
+
+                tvinfo.setText("Gæt Ordet : " + ord);
+            }
+        });
+
 
         // denne asyntask henter ord fra DRs server som sættes ind i  array.
         System.out.println("Henter ord fra DRs server....");
@@ -173,19 +208,6 @@ public class GalgelegLet_frag extends Fragment implements View.OnClickListener {
         // }
 
         // når der trykkes på genstart så nulstiles mit textview, imageview.
-        if (v == genstart) {
-            // denne metode nulstiller alt i galgelogiken
-            galgelogik.nulstil();
-
-            imgview.setImageResource(R.drawable.galge);
-            ord = galgelogik.getSynligtOrd();
-
-            Toast.makeText(getActivity(), "Genstartet", Toast.LENGTH_SHORT).show();
-
-            tvinfo2.setText("Brugte bogstaver: ");
-
-            tvinfo.setText("Gæt Ordet : " + ord);
-        }
     }
 
 
@@ -240,6 +262,19 @@ public class GalgelegLet_frag extends Fragment implements View.OnClickListener {
             System.out.println("Data not Inserted");
             Toast.makeText(getActivity(), "Spiller ikke gemt :(", Toast.LENGTH_LONG).show();
         }
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        manager.registerListener(shakeHandler, accelerometer, SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    public void onPause() {
+        manager.unregisterListener(shakeHandler);
+        super.onPause();
     }
 
 }
