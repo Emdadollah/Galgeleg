@@ -23,7 +23,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="196dp"
+        android:layout_height="213dp"
         android:id="@+id/relative">
 
 
@@ -38,8 +38,9 @@
             android:text="score"
             android:textSize="18dp"
             android:layout_gravity="center_horizontal"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/knap2" />
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp" />
 
         <Button
             android:id="@+id/knap2"
@@ -51,12 +52,9 @@
             android:padding="20dip"
             android:text="spil"
             android:textSize="18sp"
-            android:layout_above="@+id/knap3"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
             android:layout_gravity="center"
-            android:layout_alignParentStart="false" />
+            android:layout_above="@+id/knap3"
+            android:layout_centerHorizontal="true" />
 
         <Button
             android:id="@+id/opretSpiller"
@@ -68,9 +66,9 @@
             android:text="Opret spiller"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_above="@+id/knap2"
-            android:layout_alignStart="@+id/knap2"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/knap3" />
 
     </RelativeLayout>
 

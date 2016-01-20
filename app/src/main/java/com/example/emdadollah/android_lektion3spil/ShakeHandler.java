@@ -26,7 +26,7 @@ public class ShakeHandler implements SensorEventListener {
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // ignore
+        // Bruges ikke
     }
 
     @Override
@@ -41,12 +41,10 @@ public class ShakeHandler implements SensorEventListener {
             float gY = y / SensorManager.GRAVITY_EARTH;
             float gZ = z / SensorManager.GRAVITY_EARTH;
 
-            // gForce will be close to 1 when there is no movement.
             float gForce = (float)Math.sqrt(gX * gX + gY * gY + gZ * gZ);
 
             if (gForce > GREANSEVEARDI) {
                 final long now = System.currentTimeMillis();
-                // ignore shake events too close to each other (500ms)
                 if (ShakeTID + SLOP_TID_MS > now) {
                     return;
                 }

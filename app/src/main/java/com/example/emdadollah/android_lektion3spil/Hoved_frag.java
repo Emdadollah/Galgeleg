@@ -44,7 +44,8 @@ public class Hoved_frag extends Fragment implements View.OnClickListener {
         opretSpiller.setOnClickListener(this);
         spil.setOnClickListener(this);
         score.setOnClickListener(this);
-
+//OPRETSPILLER/SLETSPILLER/SESPILLERE ER USYNLIG DA DET KUN ER TIL ADMIN
+        opretSpiller.setVisibility(opretSpiller.INVISIBLE);
         return rod;
     }
 

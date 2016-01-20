@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.media.MediaPlayer;
@@ -20,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class GalgelegNormal_frag extends Fragment implements View.OnClickListener {
-
     // laver et kald til klassen Galgelogik så jeg kan bruge klassens metoder
     static Galgelogik galgelogik = new Galgelogik();
     DbHelper myDbhelper;
@@ -65,7 +65,6 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
 
         tvinfo = (TextView) rod.findViewById(R.id.th);
         tvinfo2 = (TextView) rod.findViewById(R.id.tv2);
-
 
         for (int i = 0; i < buttons.length; i++) {
             int resId = getActivity().getResources().getIdentifier(ids[i], "id", "com.example.emdadollah.android_lektion3spil");
@@ -139,21 +138,16 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         lyd.start();
         Button v1 = (Button) v;
+
         // her henter den indtastede input i mit Edittext og sætter det ind i gætBogstav metoden.
         galgelogik.gætBogstav(v1.getText().toString());
-        //v.setVisibility(v.INVISIBLE);
-
 
         v1.setVisibility(v1.INVISIBLE);
         gætbogstav = v.toString();
         checkNetwork();
         System.out.println("BOGSTAVET ER!!! " + v1.getText());
 
-        // her checker vi at længden er lig med 1 bogstav når vi indtaster i vores editText.
-        if (gætbogstav.length() != 1) {
 
-        }
-        // if (v == check) {
         // hvis den gættede ord ikke er korrekt så skal den gøre følgende
         if (galgelogik.erSidsteBogstavKorrekt() == false) {
             Toast.makeText(getActivity(), "Bogstavet er forkert", Toast.LENGTH_SHORT).show();
@@ -172,8 +166,8 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
                 imgview.setImageResource(R.drawable.forkert6);
                 galgelogik.logStatus();
             } else if (galgelogik.erSpilletTabt()) {
-                // efter den 6 gang så får man besked at man har tabt
 
+                // efter den 6 gange så får man besked at man har tabt
                 Toast.makeText(getActivity(), "du har tabt spillet", Toast.LENGTH_SHORT).show();
                 tvinfo.setText("Ordet er : " + galgelogik.getOrdet() + "                Din score er: " + Integer.toString(galgelogik.getScore()));
                 System.out.println("DIN SCORE ER NU!! " + Integer.toString(galgelogik.getScore()));
@@ -207,7 +201,6 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
             }
         }
         tvinfo2.setText("Brugte bogstaver " + galgelogik.getBrugteBogstaver());
-        // }
 
         // når der trykkes på genstart så nulstiles mit textview, imageview.
     }
@@ -220,6 +213,31 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
             red.setVisibility(red.VISIBLE);
             green.setVisibility(green.INVISIBLE);
         }
+    }
+    public void viewAll() {
+        Cursor res = myDbhelper.getAllData();
+        if (res.getCount() == 0) {
+            //message
+            showMessage("Error", "No data found");
+            return;
+        }
+        StringBuffer buffer = new StringBuffer();
+        while (res.moveToNext()) {
+            buffer.append("Spiller : " + res.getString(1) + "\n");
+            buffer.append("Score : " + res.getString(2) + "\n\n");
+        }
+        //Show all data
+        showMessage1("Spiller score", buffer.toString());
+    }
+
+    private void showMessage1(String title, String Message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setIcon(R.drawable.forkert6);
+
+        builder.setMessage(Message);
+        builder.show();
     }
 
     public void showMessage(String title, String Message) {
@@ -246,6 +264,7 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
                 currentBruger = subEditText.getText().toString();
                 submit(currentBruger, Integer.toString(galgelogik.getScore()));
                 Toast.makeText(getActivity(), subEditText.getText().toString(), Toast.LENGTH_LONG).show();
+                viewAll();
             }
         });
 
@@ -274,7 +293,6 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
             Toast.makeText(getActivity(), "Spiller ikke gemt :(", Toast.LENGTH_LONG).show();
         }
     }
-
 
     @Override
     public void onResume() {
