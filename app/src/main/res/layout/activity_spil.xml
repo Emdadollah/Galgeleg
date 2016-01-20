@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#2b9cc2"
+    android:background="#9b9b9b"
     android:weightSum="1"><![CDATA[
 
     android:background="#2b9cc2"
@@ -24,6 +24,25 @@
             android:src="@drawable/galge"
             android:textColor="#ffff"
             android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/green"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/green"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/red"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/red"
+            android:layout_marginTop="5dp" />
 
     </RelativeLayout>
 

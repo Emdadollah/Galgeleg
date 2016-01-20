@@ -15,6 +15,7 @@
         <activity
             android:name="com.example.emdadollah.android_lektion3spil.Hovedaktivity"
             android:label="Galgeleg" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

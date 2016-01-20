@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,13 +26,15 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
     DbHelper myDbhelper;
 
     ImageView imgview;
+    ImageView green;
+    ImageView red;
     private TextView tvinfo;
 
     String ord;
     String currentBruger;
     String gætbogstav;
     private TextView tvinfo2;
-
+    MediaPlayer lyd;
 
     private SensorManager manager;
     private Sensor accelerometer;
@@ -50,16 +53,19 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
         myDbhelper = new DbHelper(this.getActivity());
         View rod = in.inflate(R.layout.activity_spil, container, false);
 
-
         String[] ids = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
                 "s", "t", "u", "v", "w", "x", "y", "z", "bogstavae", "bogstavoe", "bogstavaa"};
 
+        lyd = MediaPlayer.create(getActivity(), R.raw.pop);
         imgview = (ImageView) rod.findViewById(R.id.Imgview);
+        green = (ImageView) rod.findViewById(R.id.green);
+        red = (ImageView) rod.findViewById(R.id.red);
         // sætter første billed ind i imageview.
         imgview.setImageResource(R.drawable.galge);
 
         tvinfo = (TextView) rod.findViewById(R.id.th);
         tvinfo2 = (TextView) rod.findViewById(R.id.tv2);
+
 
         for (int i = 0; i < buttons.length; i++) {
             int resId = getActivity().getResources().getIdentifier(ids[i], "id", "com.example.emdadollah.android_lektion3spil");
@@ -68,7 +74,7 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
             buttons[i].setOnClickListener(this);
 
         }
-
+        checkNetwork();
         manager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         accelerometer = manager
                 .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -83,7 +89,7 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
                 }
                 // denne metode nulstiller alt i galgelogiken
                 galgelogik.nulstil();
-
+                checkNetwork();
 
                 imgview.setImageResource(R.drawable.galge);
                 ord = galgelogik.getSynligtOrd();
@@ -95,8 +101,6 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
                 tvinfo.setText("Gæt Ordet : " + ord);
             }
         });
-
-
 
 
         // denne asyntask henter ord fra DRs server som sættes ind i  array.
@@ -133,6 +137,7 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        lyd.start();
         Button v1 = (Button) v;
         // her henter den indtastede input i mit Edittext og sætter det ind i gætBogstav metoden.
         galgelogik.gætBogstav(v1.getText().toString());
@@ -141,7 +146,7 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
 
         v1.setVisibility(v1.INVISIBLE);
         gætbogstav = v.toString();
-
+        checkNetwork();
         System.out.println("BOGSTAVET ER!!! " + v1.getText());
 
         // her checker vi at længden er lig med 1 bogstav når vi indtaster i vores editText.
@@ -207,6 +212,15 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
         // når der trykkes på genstart så nulstiles mit textview, imageview.
     }
 
+    public void checkNetwork() {
+        if (Hovedaktivity.isConnected) {
+            green.setVisibility(green.VISIBLE);
+            red.setVisibility(red.INVISIBLE);
+        } else {
+            red.setVisibility(red.VISIBLE);
+            green.setVisibility(green.INVISIBLE);
+        }
+    }
 
     public void showMessage(String title, String Message) {
         LayoutInflater inflater = LayoutInflater.from(this.getActivity());

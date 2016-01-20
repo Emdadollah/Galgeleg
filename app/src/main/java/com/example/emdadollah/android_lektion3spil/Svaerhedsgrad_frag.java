@@ -1,6 +1,7 @@
 package com.example.emdadollah.android_lektion3spil;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,7 @@ public class Svaerhedsgrad_frag extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         if (v == letteOrd) {
+            letteOrd.setBackgroundColor(Color.parseColor("#808080"));
             Fragment fragment = new GalgelegLet_frag();
             getFragmentManager().beginTransaction()
                     .replace(R.id.fragment, new GalgelegLet_frag())
@@ -43,6 +45,7 @@ public class Svaerhedsgrad_frag extends Fragment implements View.OnClickListener
 
         }
         if (v == normaleOrd) {
+            normaleOrd.setBackgroundColor(Color.parseColor("#808080"));
             Fragment fragment = new GalgelegNormal_frag();
             getFragmentManager().beginTransaction()
                     .replace(R.id.fragment, new GalgelegNormal_frag())
@@ -51,6 +54,7 @@ public class Svaerhedsgrad_frag extends Fragment implements View.OnClickListener
 
         }
         if (v == svaereOrd) {
+            svaereOrd.setBackgroundColor(Color.parseColor("#808080"));
             Fragment fragment = new GalgelegSvaer_frag();
             getFragmentManager().beginTransaction()
                     .replace(R.id.fragment, new GalgelegSvaer_frag())

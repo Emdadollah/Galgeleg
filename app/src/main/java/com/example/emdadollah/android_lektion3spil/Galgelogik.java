@@ -176,7 +176,8 @@ public class Galgelogik {
 
     Iterator<String> it = muligeOrd.iterator();
     while (it.hasNext()) {
-      if(it.next().length()>2){
+      String str = it.next();
+      if(str.length()<3 || str.length()>5){
         it.remove();
         nulstil();
       }
@@ -198,7 +199,7 @@ public class Galgelogik {
     Iterator<String> it = muligeOrd.iterator();
     while (it.hasNext()) {
       String str = it.next();
-      if(str.length()<=10 || str.length()>20){
+      if(str.length()<=8 || str.length()>15){
         it.remove();
         nulstil();
       }

@@ -45,8 +45,8 @@ public class Hovedaktivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hovedaktivity);
+        getActionBar().hide();
         a= this;
-
         isConnected = forbindelse();
         IntentFilter i = new IntentFilter();
         i.addCategory(Intent.CATEGORY_DEFAULT);
