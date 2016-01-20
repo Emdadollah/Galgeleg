@@ -23,22 +23,28 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
 
     ImageView imgview;
     private TextView tvinfo;
-    private Button check;
-    private EditText et;
+
     String ord;
+    String currentBruger;
     String gætbogstav;
     private TextView tvinfo2;
-    String currentBruger;
     Button genstart;
+
+    private Button a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, bogstavae, bogstavoe, bogstavaa;
+
+    Button[] buttons = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, bogstavae, bogstavoe, bogstavaa};
 
     private static final String tag = "Dr server";
 
 
     @Override
-    public View onCreateView(LayoutInflater i, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater in, ViewGroup container, Bundle savedInstanceState) {
         myDbhelper = new DbHelper(this.getActivity());
+        View rod = in.inflate(R.layout.activity_spil, container, false);
 
-        View rod = i.inflate(R.layout.activity_spil, container, false);
+
+        String[] ids = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
+                "s", "t", "u", "v", "w", "x", "y", "z", "bogstavae", "bogstavoe", "bogstavaa"};
 
         imgview = (ImageView) rod.findViewById(R.id.Imgview);
         // sætter første billed ind i imageview.
@@ -46,17 +52,17 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
 
         tvinfo = (TextView) rod.findViewById(R.id.th);
         tvinfo2 = (TextView) rod.findViewById(R.id.tv2);
-        check = (Button) rod.findViewById(R.id.check);
         genstart = (Button) rod.findViewById(R.id.genstart);
-        et = (EditText) rod.findViewById(R.id.editText);
 
+        for (int i = 0; i < buttons.length; i++) {
+            int resId = getActivity().getResources().getIdentifier(ids[i], "id", "com.example.emdadollah.android_lektion3spil");
+            System.out.println("RETUNER RESID : " + resId);
+            buttons[i] = (Button) rod.findViewById(resId);
+            buttons[i].setOnClickListener(this);
 
-        //System.out.println("----------"+Logik.user.getCurrentUser().getObjectId()+"----------");
+        }
 
-
-        check.setOnClickListener(this);
         genstart.setOnClickListener(this);
-
 
         // denne asyntask henter ord fra DRs server som sættes ind i  array.
         System.out.println("Henter ord fra DRs server....");
@@ -65,7 +71,6 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
             protected Object doInBackground(Object... arg0) {
                 try {
                     galgelogik.hentOrdFraDr();
-                    galgelogik.nulstil();
 
                     return Log.d(tag, "Der er hentet data fra Dr");
                 } catch (Exception e) {
@@ -76,104 +81,103 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
 
             @Override
             protected void onPostExecute(Object resultat) {
-
-                // sætter den generede ord ind i textview  .
+                //et.setText("resultat: \n" + resultat);
                 galgelogik.normalOrd();
                 tvinfo.setText("Gæt Ordet :" + galgelogik.getSynligtOrd());
                 tvinfo2.setText("Brugte bogstaver :");
-
-
             }
         }.execute();
 
+        // sætter den generede ord ind i textview  .
 
         galgelogik.logStatus();
         galgelogik.opdaterSynligtOrd();
+
         return rod;
-
     }
-
 
     @Override
     public void onClick(View v) {
-
+        Button v1 = (Button) v;
         // her henter den indtastede input i mit Edittext og sætter det ind i gætBogstav metoden.
-        galgelogik.gætBogstav(et.getText().toString());
-        et.clearFocus();
+        galgelogik.gætBogstav(v1.getText().toString());
+        //v.setVisibility(v.INVISIBLE);
 
-        gætbogstav = et.getText().toString();
+
+        v1.setVisibility(v1.INVISIBLE);
+        gætbogstav = v.toString();
+
+        System.out.println("BOGSTAVET ER!!! " + v1.getText());
+
         // her checker vi at længden er lig med 1 bogstav når vi indtaster i vores editText.
         if (gætbogstav.length() != 1) {
-            et.setError("skriv kun et bogstav");
+
         }
-
-        if (v == check) {
-            // hvis den gættede ord ikke er korrekt så skal den gøre følgende
-            if (galgelogik.erSidsteBogstavKorrekt() == false) {
-
-                Toast.makeText(getActivity(), "Bogstavet er forkert", Toast.LENGTH_SHORT).show();
-
-                // for hver gang man gætter forkert så bliver vores imageview opdateret med et nyt billed
-                if (galgelogik.getAntalForkerteBogstaver() == 1) {
-                    imgview.setImageResource(R.drawable.forkert1);
-                } else if (galgelogik.getAntalForkerteBogstaver() == 2) {
-                    imgview.setImageResource(R.drawable.forkert2);
-                } else if (galgelogik.getAntalForkerteBogstaver() == 3) {
-                    imgview.setImageResource(R.drawable.forkert3);
-                } else if (galgelogik.getAntalForkerteBogstaver() == 4) {
-                    imgview.setImageResource(R.drawable.forkert4);
-                } else if (galgelogik.getAntalForkerteBogstaver() == 5) {
-                    imgview.setImageResource(R.drawable.forkert5);
-                } else if (galgelogik.getAntalForkerteBogstaver() == 6) {
-                    imgview.setImageResource(R.drawable.forkert6);
-                    galgelogik.logStatus();
-                }
+        // if (v == check) {
+        // hvis den gættede ord ikke er korrekt så skal den gøre følgende
+        if (galgelogik.erSidsteBogstavKorrekt() == false) {
+            Toast.makeText(getActivity(), "Bogstavet er forkert", Toast.LENGTH_SHORT).show();
+            // for hver gang man gætter forkert så bliver vores imageview opdateret med et nyt billed
+            if (galgelogik.getAntalForkerteBogstaver() == 1) {
+                imgview.setImageResource(R.drawable.forkert1);
+            } else if (galgelogik.getAntalForkerteBogstaver() == 2) {
+                imgview.setImageResource(R.drawable.forkert2);
+            } else if (galgelogik.getAntalForkerteBogstaver() == 3) {
+                imgview.setImageResource(R.drawable.forkert3);
+            } else if (galgelogik.getAntalForkerteBogstaver() == 4) {
+                imgview.setImageResource(R.drawable.forkert4);
+            } else if (galgelogik.getAntalForkerteBogstaver() == 5) {
+                imgview.setImageResource(R.drawable.forkert5);
+            } else if (galgelogik.getAntalForkerteBogstaver() == 6) {
+                imgview.setImageResource(R.drawable.forkert6);
+                galgelogik.logStatus();
+            } else if (galgelogik.erSpilletTabt()) {
                 // efter den 6 gang så får man besked at man har tabt
-                else if (galgelogik.erSpilletTabt()) {
-                    Toast.makeText(getActivity(), "du har tabt spillet", Toast.LENGTH_SHORT).show();
-                    tvinfo.setText("Ordet er : " + galgelogik.getOrdet() + "                Din score er: "+ Integer.toString(galgelogik.getScore()));
-                    System.out.println("DIN SCORE ER NU!! " + Integer.toString(galgelogik.getScore()));
-                    if (currentBruger == null) {
-                        showMessage("Score", "Ønsker du at gemme din score?");
-                    } else {
-                        updateAll(currentBruger, Integer.toString(galgelogik.getScore()));
-                    }
-                }
 
-            } else if (galgelogik.erSidsteBogstavKorrekt() == true) {
-
-                Toast.makeText(getActivity(), "Bogstavet er korrekt", Toast.LENGTH_SHORT).show();
-
-                galgelogik.opdaterSynligtOrd();
-
-                // denne metode gør de bogstaver der er korrekte synlige.
-                tvinfo.setText("Gæt Ordet : " + galgelogik.getSynligtOrd());
-
-                if (galgelogik.erSpilletVundet()) {
-
-                    galgelogik.opdaterSynligtOrd();
-
-                    Toast.makeText(getActivity(), "Du har vundet tillykke", Toast.LENGTH_SHORT).show();
-                    if (currentBruger == null) {
-                        showMessage("Score", "Ønsker du at gemme din score?");
-                    } else {
-                        updateAll(currentBruger, Integer.toString(galgelogik.getScore()));
-                    }
+                Toast.makeText(getActivity(), "du har tabt spillet", Toast.LENGTH_SHORT).show();
+                tvinfo.setText("Ordet er : " + galgelogik.getOrdet() + "                Din score er: " + Integer.toString(galgelogik.getScore()));
+                System.out.println("DIN SCORE ER NU!! " + Integer.toString(galgelogik.getScore()));
+                if (currentBruger == null) {
+                    showMessage("Score", "Ønsker du at gemme din score?");
+                } else {
+                    updateAll(currentBruger, Integer.toString(galgelogik.getScore()));
                 }
 
             }
 
+        } else if (galgelogik.erSidsteBogstavKorrekt() == true) {
 
-            tvinfo2.setText("Brugte bogstaver " + galgelogik.getBrugteBogstaver() + galgelogik.getAntalForkerteBogstaver());
+            Toast.makeText(getActivity(), "Bogstavet er korrekt", Toast.LENGTH_SHORT).show();
 
+            galgelogik.opdaterSynligtOrd();
+
+            // denne metode gør de bogstaver der er korrekte synlige.
+            tvinfo.setText("Gæt Ordet : " + galgelogik.getSynligtOrd());
+
+            if (galgelogik.erSpilletVundet()) {
+
+                galgelogik.opdaterSynligtOrd();
+
+                Toast.makeText(getActivity(), "Du har vundet tillykke", Toast.LENGTH_SHORT).show();
+                if (currentBruger == null) {
+                    showMessage("Score", "Ønsker du at gemme din score?");
+                } else {
+                    updateAll(currentBruger, Integer.toString(galgelogik.getScore()));
+                }
+            }
         }
+        tvinfo2.setText("Brugte bogstaver " + galgelogik.getBrugteBogstaver());
+        // }
 
         // når der trykkes på genstart så nulstiles mit textview, imageview.
         if (v == genstart) {
             // denne metode nulstiller alt i galgelogiken
             galgelogik.nulstil();
-
-            et.setText("");
+/**
+            for (int i = 0, i<buttons.length; i++){
+                button[i].setVisibility(VISIBLE);
+            }
+ */
             imgview.setImageResource(R.drawable.galge);
             ord = galgelogik.getSynligtOrd();
 
@@ -184,6 +188,8 @@ public class GalgelegNormal_frag extends Fragment implements View.OnClickListene
             tvinfo.setText("Gæt Ordet : " + ord);
         }
     }
+
+
     public void showMessage(String title, String Message) {
         LayoutInflater inflater = LayoutInflater.from(this.getActivity());
         View subView = inflater.inflate(R.layout.dialog_layout, null);

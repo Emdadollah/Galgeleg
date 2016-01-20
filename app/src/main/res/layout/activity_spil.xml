@@ -9,6 +9,8 @@
     android:background="#2b9cc2"
     tools:context=".MainActivity">
 
+
+
     ]]>
 
     <RelativeLayout
@@ -18,22 +20,10 @@
         <ImageView
             android:id="@+id/Imgview"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="290dp"
             android:src="@drawable/galge"
             android:textColor="#ffff"
             android:layout_alignParentStart="true" />
-
-        <Button
-            android:id="@+id/check"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="@drawable/buttonshadow"
-            android:text="Check!"
-            android:textColor="#ffff"
-            android:layout_gravity="center|right"
-            android:layout_weight="0.5"
-            android:textSize="25dp"
-            android:layout_toStartOf="@+id/genstart" />
 
         <Button
             android:id="@+id/genstart"
@@ -44,36 +34,32 @@
             android:text="Genstart"
             android:textColor="#ffff"
             android:layout_gravity="left"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignBottom="@+id/check" />
+            android:layout_marginEnd="286dp" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/imageView2"
+            android:src="@drawable/slidecirclegreen"
+            android:cropToPadding="false"
+            android:contextClickable="false"
+            android:clickable="false"
+            android:baselineAlignBottom="false"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="126dp">
+        android:layout_height="50dp">
         <TextView
             android:id="@+id/th"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Gæt ordet:"
             android:textColor="#ffff"
-            android:layout_alignTop="@+id/editText"
             android:layout_alignParentStart="true" />
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLength="1"
-            android:selectAllOnFocus="true"
-            android:textColor="#ffff"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="62dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/tv2"
@@ -89,7 +75,7 @@
 
     <GridLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
 
         <Button
@@ -125,8 +111,8 @@
             android:layout_height="40dp"
             android:text="d"
             android:id="@+id/d"
-            android:layout_row="1"
-            android:layout_column="0" />
+            android:layout_row="0"
+            android:layout_column="3" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -134,8 +120,8 @@
             android:layout_height="40dp"
             android:text="e"
             android:id="@+id/e"
-            android:layout_row="1"
-            android:layout_column="1" />
+            android:layout_row="0"
+            android:layout_column="4" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -144,7 +130,7 @@
             android:text="f"
             android:id="@+id/f"
             android:layout_row="0"
-            android:layout_column="3" />
+            android:layout_column="5" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -152,8 +138,8 @@
             android:layout_height="40dp"
             android:text="g"
             android:id="@+id/g"
-            android:layout_row="1"
-            android:layout_column="2" />
+            android:layout_row="0"
+            android:layout_column="6" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -162,7 +148,7 @@
             android:text="h"
             android:id="@+id/h"
             android:layout_row="0"
-            android:layout_column="4" />
+            android:layout_column="7" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -171,7 +157,7 @@
             android:text="i"
             android:id="@+id/i"
             android:layout_row="1"
-            android:layout_column="3" />
+            android:layout_column="0" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -179,8 +165,8 @@
             android:layout_height="40dp"
             android:text="j"
             android:id="@+id/j"
-            android:layout_row="0"
-            android:layout_column="5" />
+            android:layout_row="1"
+            android:layout_column="1" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -189,7 +175,7 @@
             android:text="k"
             android:id="@+id/k"
             android:layout_row="1"
-            android:layout_column="4" />
+            android:layout_column="2" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -197,15 +183,24 @@
             android:layout_height="40dp"
             android:text="l"
             android:id="@+id/l"
-            android:layout_row="0"
-            android:layout_column="6" />
+            android:layout_row="1"
+            android:layout_column="3" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="m"
+            android:id="@+id/m"
+            android:layout_row="1"
+            android:layout_column="4" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:text="n"
-            android:id="@+id/buttonn"
+            android:id="@+id/n"
             android:layout_row="1"
             android:layout_column="5" />
 
@@ -213,17 +208,8 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="m"
-            android:id="@+id/buttonm"
-            android:layout_row="0"
-            android:layout_column="7" />
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
             android:text="o"
-            android:id="@+id/buttono"
+            android:id="@+id/o"
             android:layout_row="1"
             android:layout_column="6" />
 
@@ -232,7 +218,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:text="p"
-            android:id="@+id/buttonp"
+            android:id="@+id/p"
             android:layout_row="1"
             android:layout_column="7" />
 
@@ -241,25 +227,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:text="q"
-            android:id="@+id/buttonq"
-            android:layout_row="0"
-            android:layout_column="8" />
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="r"
-            android:id="@+id/buttonr"
-            android:layout_row="1"
-            android:layout_column="8" />
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="s"
-            android:id="@+id/buttons"
+            android:id="@+id/q"
             android:layout_row="2"
             android:layout_column="0" />
 
@@ -267,8 +235,8 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="t"
-            android:id="@+id/buttont"
+            android:text="r"
+            android:id="@+id/r"
             android:layout_row="2"
             android:layout_column="1" />
 
@@ -276,8 +244,8 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="u"
-            android:id="@+id/buttonu"
+            android:text="s"
+            android:id="@+id/s"
             android:layout_row="2"
             android:layout_column="2" />
 
@@ -285,8 +253,8 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="v"
-            android:id="@+id/buttonv"
+            android:text="t"
+            android:id="@+id/t"
             android:layout_row="2"
             android:layout_column="3" />
 
@@ -294,8 +262,8 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="w"
-            android:id="@+id/buttonw"
+            android:text="u"
+            android:id="@+id/u"
             android:layout_row="2"
             android:layout_column="4" />
 
@@ -303,8 +271,8 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="x"
-            android:id="@+id/buttonx"
+            android:text="v"
+            android:id="@+id/v"
             android:layout_row="2"
             android:layout_column="5" />
 
@@ -312,8 +280,8 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="y"
-            android:id="@+id/buttony"
+            android:text="w"
+            android:id="@+id/w"
             android:layout_row="2"
             android:layout_column="6" />
 
@@ -321,8 +289,8 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="z"
-            android:id="@+id/buttonz"
+            android:text="x"
+            android:id="@+id/x"
             android:layout_row="2"
             android:layout_column="7" />
 
@@ -330,17 +298,26 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="æ"
-            android:id="@+id/buttonæ"
-            android:layout_row="2"
-            android:layout_column="8" />
+            android:text="y"
+            android:id="@+id/y"
+            android:layout_row="3"
+            android:layout_column="1" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="ø"
-            android:id="@+id/buttonø"
+            android:text="z"
+            android:id="@+id/z"
+            android:layout_row="3"
+            android:layout_column="2" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="æ"
+            android:id="@+id/bogstavae"
             android:layout_row="3"
             android:layout_column="3" />
 
@@ -348,10 +325,19 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="å"
-            android:id="@+id/buttonå"
+            android:text="ø"
+            android:id="@+id/bogstavoe"
             android:layout_row="3"
             android:layout_column="4" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="å"
+            android:id="@+id/bogstavaa"
+            android:layout_row="3"
+            android:layout_column="5" />
 
     </GridLayout>
 

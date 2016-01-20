@@ -1,5 +1,6 @@
 package com.example.emdadollah.android_lektion3spil;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -15,6 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Array;
+import java.util.ArrayList;
+
 public class GalgelegLet_frag extends Fragment implements View.OnClickListener {
 
     // laver et kald til klassen Galgelogik så jeg kan bruge klassens metoder
@@ -23,53 +27,26 @@ public class GalgelegLet_frag extends Fragment implements View.OnClickListener {
 
     ImageView imgview;
     private TextView tvinfo;
-    private Button check;
-    private EditText et;
+
     String ord;
     String currentBruger;
     String gætbogstav;
     private TextView tvinfo2;
     Button genstart;
 
-    private Button a;
-    private Button b;
-    private Button c;
-    private Button d;
-    private Button e;
-    private Button f;
-    private Button g;
-    private Button h;
-    private Button i;
-    private Button j;
-    private Button k;
-    private Button l;
-    private Button m;
-    private Button n;
-    private Button o;
-    private Button p;
-    private Button q;
-    private Button r;
-    private Button s;
-    private Button t;
-    private Button u;
-    private Button v;
-    private Button w;
-    private Button x;
-    private Button y;
-    private Button z;
-    private Button æ;
-    private Button ø;
-    private Button å;
-
-
+    private Button a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, bogstavae,bogstavoe,bogstavaa;
 
     private static final String tag = "Dr server";
-
 
     @Override
     public View onCreateView(LayoutInflater in, ViewGroup container, Bundle savedInstanceState) {
         myDbhelper = new DbHelper(this.getActivity());
         View rod = in.inflate(R.layout.activity_spil, container, false);
+
+        Button[] buttons = {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, bogstavae, bogstavoe, bogstavaa};
+
+        String[] ids = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
+                "s", "t", "u", "v", "w", "x", "y", "z","bogstavae","bogstavoe","bogstavaa"};
 
         imgview = (ImageView) rod.findViewById(R.id.Imgview);
         // sætter første billed ind i imageview.
@@ -77,58 +54,19 @@ public class GalgelegLet_frag extends Fragment implements View.OnClickListener {
 
         tvinfo = (TextView) rod.findViewById(R.id.th);
         tvinfo2 = (TextView) rod.findViewById(R.id.tv2);
-        check = (Button) rod.findViewById(R.id.check);
         genstart = (Button) rod.findViewById(R.id.genstart);
-        et = (EditText) rod.findViewById(R.id.editText);
 
-        a = (Button) rod.findViewById(R.id.a);
-        b = (Button) rod.findViewById(R.id.b);
-        c = (Button) rod.findViewById(R.id.c);
-        d = (Button) rod.findViewById(R.id.d);
-        e = (Button) rod.findViewById(R.id.e);
-        f = (Button) rod.findViewById(R.id.f);
-        g = (Button) rod.findViewById(R.id.g);
-        h = (Button) rod.findViewById(R.id.h);
-        i = (Button) rod.findViewById(R.id.i);
-        j = (Button) rod.findViewById(R.id.j);
-        k = (Button) rod.findViewById(R.id.k);
-        l = (Button) rod.findViewById(R.id.l);
+        for (int i = 0; i < buttons.length; i++) {
+            int resId = getActivity().getResources().getIdentifier(ids[i], "id", "com.example.emdadollah.android_lektion3spil");
+            System.out.println("RETUNER RESID : "+resId);
+            buttons[i] = (Button) rod.findViewById(resId);
+            buttons[i].setOnClickListener(this);
+
+        }
 
 
-        check.setOnClickListener(this);
         genstart.setOnClickListener(this);
 
-        a.setOnClickListener(this);
-        b.setOnClickListener(this);
-        c.setOnClickListener(this);
-        d.setOnClickListener(this);
-        e.setOnClickListener(this);
-        f.setOnClickListener(this);
-        g.setOnClickListener(this);
-        h.setOnClickListener(this);
-        i.setOnClickListener(this);
-        j.setOnClickListener(this);
-        k.setOnClickListener(this);
-        l.setOnClickListener(this);
-        /**
-        m.setOnClickListener(this);
-        n.setOnClickListener(this);
-        o.setOnClickListener(this);
-        p.setOnClickListener(this);
-        q.setOnClickListener(this);
-        r.setOnClickListener(this);
-        s.setOnClickListener(this);
-        t.setOnClickListener(this);
-        u.setOnClickListener(this);
-        v.setOnClickListener(this);
-        w.setOnClickListener(this);
-        x.setOnClickListener(this);
-        y.setOnClickListener(this);
-        z.setOnClickListener(this);
-        æ.setOnClickListener(this);
-        ø.setOnClickListener(this);
-        å.setOnClickListener(this);
-*/
         // denne asyntask henter ord fra DRs server som sættes ind i  array.
         System.out.println("Henter ord fra DRs server....");
         new AsyncTask() {
@@ -153,18 +91,13 @@ public class GalgelegLet_frag extends Fragment implements View.OnClickListener {
             }
         }.execute();
 
-
         // sætter den generede ord ind i textview  .
-
 
         galgelogik.logStatus();
         galgelogik.opdaterSynligtOrd();
 
         return rod;
-
-
     }
-
 
     @Override
     public void onClick(View v) {
@@ -172,25 +105,21 @@ public class GalgelegLet_frag extends Fragment implements View.OnClickListener {
         // her henter den indtastede input i mit Edittext og sætter det ind i gætBogstav metoden.
         galgelogik.gætBogstav(v1.getText().toString());
         //v.setVisibility(v.INVISIBLE);
-        et.clearFocus();
+
 
         v1.setVisibility(v1.INVISIBLE);
         gætbogstav = v.toString();
 
         System.out.println("BOGSTAVET ER!!! " + v1.getText());
 
-
         // her checker vi at længden er lig med 1 bogstav når vi indtaster i vores editText.
         if (gætbogstav.length() != 1) {
-            et.setError("skriv kun et bogstav");
-        }
 
+        }
         // if (v == check) {
         // hvis den gættede ord ikke er korrekt så skal den gøre følgende
         if (galgelogik.erSidsteBogstavKorrekt() == false) {
-
             Toast.makeText(getActivity(), "Bogstavet er forkert", Toast.LENGTH_SHORT).show();
-
             // for hver gang man gætter forkert så bliver vores imageview opdateret med et nyt billed
             if (galgelogik.getAntalForkerteBogstaver() == 1) {
                 imgview.setImageResource(R.drawable.forkert1);
@@ -248,7 +177,6 @@ public class GalgelegLet_frag extends Fragment implements View.OnClickListener {
             // denne metode nulstiller alt i galgelogiken
             galgelogik.nulstil();
 
-            et.setText("");
             imgview.setImageResource(R.drawable.galge);
             ord = galgelogik.getSynligtOrd();
 
