@@ -28,7 +28,7 @@ public class Hovedaktivity extends Activity{
             // Se http://developer.android.com/training/monitoring-device-state/connectivity-monitoring.html
             // for flere muligheder
            isConnected = forbindelse();
-            Toast.makeText(context, "Ændring registreret.  Forbindelse? " + isConnected, Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "Ændring registreret.  Forbindelse? " + isConnected, Toast.LENGTH_LONG).show();
 
         }
     };

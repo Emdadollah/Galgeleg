@@ -11,6 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * IKKE SYNLIG PÅ TELEFONEN
+ *
+ * KUN FOR UDVIKLER
+ */
 
 public class OpretBruger_frag extends Fragment implements View.OnClickListener {
     DbHelper myDbhelper;

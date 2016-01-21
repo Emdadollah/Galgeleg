@@ -8,9 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-/**
- * Created by Mourhaf on 09-01-2016.
- */
 public class Svaerhedsgrad_frag extends Fragment implements View.OnClickListener {
 
     Button letteOrd;

@@ -218,7 +218,7 @@ public class GalgelegSvaer_frag extends Fragment implements View.OnClickListener
         Cursor res = myDbhelper.getAllData();
         if (res.getCount() == 0) {
             //message
-            showMessage("Error", "No data found");
+            showMessage("Fejl", "Ingen data fundet");
             return;
         }
         StringBuffer buffer = new StringBuffer();
@@ -252,7 +252,7 @@ public class GalgelegSvaer_frag extends Fragment implements View.OnClickListener
         builder.setCancelable(true);
         builder.setView(subView);
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         dialog.dismiss();
                     }

@@ -1,8 +1,5 @@
 package com.example.emdadollah.android_lektion3spil;
 
-/**
- * Created by Emdadollah on 19-01-2016.
- */
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
